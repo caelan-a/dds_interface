@@ -7,8 +7,10 @@ This project allows the creation of a 'DDS Interface' static library that includ
   "nddscpp2z"
   "nddscz"
   "nddscorez"
-2. Environment variable NDDSHOME be set correctly on system (eg NDDSHOME="C:/Program Files/rti_connext_dds-6.1.0")
-
+2. Environment variable NDDSHOME be set correctly on system (eg NDDSHOME="C:/Program Files/rti_connext_dds-6.1.0") 
+3. Platform currently tested on 
+    - Windows 10
+    - Ubuntu 18.04
 ## How To Build
 1. Create directory for generated build files
 ```
