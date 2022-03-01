@@ -16,7 +16,7 @@
 #include "load_dynamic_type.hpp"
 
 void run_using_dds_interface() {
-    DSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
+    DDSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
     DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
 
     ////// construct message to send
