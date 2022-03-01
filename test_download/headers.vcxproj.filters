@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\ebc08d2af6b4fc80a3a6567c94f7ae3d\headers-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\ebc08d2af6b4fc80a3a6567c94f7ae3d\headers-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\ebc08d2af6b4fc80a3a6567c94f7ae3d\headers-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\ebc08d2af6b4fc80a3a6567c94f7ae3d\headers-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\ebc08d2af6b4fc80a3a6567c94f7ae3d\headers-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\ebc08d2af6b4fc80a3a6567c94f7ae3d\headers-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\ebc08d2af6b4fc80a3a6567c94f7ae3d\headers-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\0cfaa20a0d96a40daba179d85c71150a\headers-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\7ce5282ad73d0e9936746100c1601abd\headers.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\tests\CMakeFiles\headers" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{11D0F656-7A75-3502-96E5-28975BFA12FD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/headers-populate"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/39cbd0f0c32c2499bb9e524f84871311/headers-populate.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/4c3e0d794d9e9208449809aca7084d3d/headers-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/_deps/headers-subbuild/CMakeFiles/0b53870a2b0233ce5a2b6d59d2db9438/headers-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"headers-populate"
+		],
+		"name" : "headers-populate"
+	}
+}

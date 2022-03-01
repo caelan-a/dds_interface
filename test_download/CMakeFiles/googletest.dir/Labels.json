@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/googletest"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/7ce5282ad73d0e9936746100c1601abd/googletest.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/0cfaa20a0d96a40daba179d85c71150a/googletest-complete.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/4e0fb758736a660776c9083d4a1d405c/googletest-build.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/4e0fb758736a660776c9083d4a1d405c/googletest-configure.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/4e0fb758736a660776c9083d4a1d405c/googletest-download.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/4e0fb758736a660776c9083d4a1d405c/googletest-install.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/4e0fb758736a660776c9083d4a1d405c/googletest-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/4e0fb758736a660776c9083d4a1d405c/googletest-patch.rule"
+		},
+		{
+			"file" : "C:/Users/cande/Desktop/AMMO/tmp/dds_interface/tests/CMakeFiles/4e0fb758736a660776c9083d4a1d405c/googletest-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"googletest"
+		],
+		"name" : "googletest"
+	}
+}
