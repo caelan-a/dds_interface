@@ -1,2 +1,4 @@
 build
 examples/dynamic_types/build
+tests
+test
