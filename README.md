@@ -9,8 +9,8 @@ This project allows the creation of a 'DDS Interface' static library that includ
   "nddscorez"
 2. Environment variable NDDSHOME be set correctly on system (eg NDDSHOME="C:/Program Files/rti_connext_dds-6.1.0") 
 3. Platform currently tested on 
-    - Windows 10
-    - Ubuntu 18.04
+    - Windows 10 (x64Win64VS2017)
+    - Ubuntu 18.04 (x64Linux4gcc7.3.0)
 ## How To Build
 1. Create directory for generated build files
 ```
@@ -25,6 +25,9 @@ cmake -DPLATFORM=<PLATFORM> ../
 `cmake --build . --config=<Debug|Release>` 
 
 ## Using Static Library in Projects
+On Windows, a bundled library will be produced which will remove the need to link core rti libs.
+On UNIX, the ar binary does not support this (doesnt create index). Support will need to be added (See (here)[https://stackoverflow.com/questions/54249128/ar-command-does-not-produce-index-when-combining-static-libraries])
+As a result, core rti libs will need to be linked. These are conveniently exported into the build/out folder 
 ### Debug
 1. To use DDSInterface in external projects, the following should be done:
 * Add link library `dds_interface_debug.lib` to linker 
@@ -52,6 +55,32 @@ cmake -DPLATFORM=<PLATFORM> ../
 Use this CMAKE as an example for future DDS enabled projects
 ## Example Usage
 
+### DynamicTypes
+An example project that makes use of the built static library can be found in /examples.
+It requires that the root cmake is run and built to produce the required resources (libs and headers). Once the main project is built, do the following:
+1. `cd examples/dynamic_types`
+2. Make build dir
+```
+mkdir build
+cd build
+```
+2. Generate build files using CMake
+```
+cmake ../
+```
+3. Build project 
+`cmake --build . --config=<Debug|Release>` 
+4. Run DynamicTypes
+Windows
+```
+cd out
+./DynamicTypes.exe
+```
+Linux
+```
+cd out
+./DynamicTypes
+```
 ### Using DDSInterface wrapper
 
 ```
