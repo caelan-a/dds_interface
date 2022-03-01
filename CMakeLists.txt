@@ -10,7 +10,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)
 # Generate filename for static library on current platform
 function(getPlatformLibWithExtension text OUTPUT_VAR)
 if(WIN32)
-    set(${OUTPUT_VAR} "${text}" PARENT_SCOPE)
+    set(${OUTPUT_VAR} "${text}.lib" PARENT_SCOPE)
 elseif(UNIX)
     set(${OUTPUT_VAR} "lib${text}.a" PARENT_SCOPE)
 else()
@@ -133,16 +133,16 @@ if(CMAKE_AR)
 
       # Create library targets for RTi debug and release libs
       foreach(CORE_RTI_LIB IN LISTS CORE_RTI_LIBS CORE_RTI_LIBS_DEBUG)
-      getPlatformLibWithExtension("$CORE_RTI_LIB" LIB_WITH_EXTENSION)
-      add_library($CORE_RTI_LIB SHARED IMPORTED )
-      set_target_properties( $CORE_RTI_LIB PROPERTIES IMPORTED_LOCATION ${NDDS_HOME}/lib/${PLATFORM}/${LIB_WITH_EXTENSION} IMPORTED_IMPLIB ${NDDS_HOME}/lib/${PLATFORM}/${LIB_WITH_EXTENSION} )
+        getPlatformLibWithExtension("${CORE_RTI_LIB}" LIB_WITH_EXTENSION)
+        add_library(${CORE_RTI_LIB} SHARED IMPORTED )
+        set_target_properties( ${CORE_RTI_LIB} PROPERTIES IMPORTED_LOCATION ${NDDS_HOME}/lib/${PLATFORM}/${LIB_WITH_EXTENSION} IMPORTED_IMPLIB ${NDDS_HOME}/lib/${PLATFORM}/${LIB_WITH_EXTENSION} )
       endforeach()
     
       # Create custom target for static library combination 
       getPlatformLibWithExtension("${PROJECT_NAME}$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>" LIB_WITH_EXTENSION)
       
       add_custom_target(BundleStaticLibs ALL
-          COMMAND ${CMAKE_AR} -c -r -s $<TARGET_FILE_DIR:${TARGET_DDS_INTERFACE_LIB_STANDALONE}>/"${LIB_WITH_EXTENSION}"
+          COMMAND ${CMAKE_AR} $<TARGET_FILE_DIR:${TARGET_DDS_INTERFACE_LIB_STANDALONE}>/"${LIB_WITH_EXTENSION}"
               "$<TARGET_FILE:${TARGET_DDS_INTERFACE_LIB_STANDALONE}>"
               "$<TARGET_FILE:nddscpp2z$<$<CONFIG:Debug>:d>>"
               "$<TARGET_FILE:nddscz$<$<CONFIG:Debug>:d>>" 
