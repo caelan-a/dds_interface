@@ -15,6 +15,23 @@
  */
 #include "load_dynamic_type.hpp"
 
+void run_using_dds_interface() {
+    DSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
+    DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
+
+    ////// construct message to send
+    dds::core::xtypes::DynamicData message = dds_publisher.create_message();
+    message.value<std::string>("msg", "yoyo");
+
+    while (true) {
+        printf("Sending message\n");
+        dds_publisher.publish(message);
+        std::cout << "Sleeping for 4s.." << std::endl;
+        rti::util::sleep(dds::core::Duration(4));
+        std::cout << "I'm back baby" << std::endl;
+    }
+}
+
 void run_using_core_libs() {
   using namespace dds::core::xtypes;
 
@@ -39,4 +56,5 @@ void run_using_core_libs() {
 
 int main(int argc, char **argv) {
     run_using_core_libs();
+    // run_using_dds_interface();
 }

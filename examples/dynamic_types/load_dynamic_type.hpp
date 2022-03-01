@@ -23,4 +23,8 @@
 #include <dds/pub/ddspub.hpp>
 #include <dds/sub/ddssub.hpp>
 
+#include <DDSInterface.h>
+#include <DDSPublisher.h>
+
+
 #endif  // C__USERS_INSITECMIS_DESKTOP_WORK_DDS_MEMES_LOAD_DYNAMIC_TYPE_HPP_
