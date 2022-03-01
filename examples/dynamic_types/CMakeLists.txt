@@ -6,11 +6,11 @@ set(ROOT_LIB_DIR ${CMAKE_BINARY_DIR}/../../../build/out/lib)
 
 # Check if rti headers and libs have been imported into project dir
 if(NOT IS_DIRECTORY "${ROOT_INCLUDE_DIR}")
-message(FATAL_ERROR "RTi headers have not been imported into project. Please use DDS Interface repo to export and place in at ${ROOT_INCLUDE_DIR}\nChange path at CMakeLists.txt:4")
+  message(FATAL_ERROR "RTi headers have not been imported into project. Please use DDS Interface repo to export and place in at ${ROOT_INCLUDE_DIR}\nChange path at CMakeLists.txt:4")
 endif()
 
 if(NOT IS_DIRECTORY "${ROOT_LIB_DIR}")
-message(FATAL_ERROR "RTi libs have not been imported into project. Please use DDS Interface repo to export and place in at ${ROOT_LIB_DIR}\nChange path at CMakeLists.txt:5")
+  message(FATAL_ERROR "RTi libs have not been imported into project. Please use DDS Interface repo to export and place in at ${ROOT_LIB_DIR}\nChange path at CMakeLists.txt:5")
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)
@@ -23,6 +23,13 @@ project(DynamicTypes VERSION 1.1)
 
 ### Create targets ###
 add_executable(${PROJECT_NAME} load_dynamic_type.cpp)
+
+# Set MSVC specific properties
+if ( MSVC )
+    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} )
+    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} )
+endif ( MSVC )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 11
@@ -66,8 +73,8 @@ if (WIN32)
   "WS2_32"
   )
 
-  link(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG ${NATIVE_WIN_LIBS})
-  link(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE ${NATIVE_WIN_LIBS})
+  list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG ${NATIVE_WIN_LIBS})
+  list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE ${NATIVE_WIN_LIBS})
 endif()
 
 target_link_libraries(${PROJECT_NAME} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
