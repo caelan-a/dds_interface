@@ -1,7 +1,8 @@
 
 # DDS Interface
-This project allows the creation of a 'DDS Interface' static library that includes all of RTi's libraries bundled together along with a convenience class to use the XML defined messages. This facilitates much more flexible and convenient usage of DDS in future projects.
+This project allows building an easy to use static library (or set of) along with exported headers to easily make use of RTi's ConnextDDS in future projects without heavy needing licences/Connext installation.
 
+This project also includes an example that makes use of these resources with a CMake that demonstrates crossplatform DDS integration with necessary flags (eg preprocessor definitions)
 ## Requirements
 1. It's required for RTi DDS Connext to be installed on your device. Specifically, the header files and libraries 
   "nddscpp2z"
