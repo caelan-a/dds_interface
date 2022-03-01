@@ -1,8 +1,7 @@
 
 # DDS Interface
-This project allows building an easy to use static library (or set of) along with exported headers to easily make use of RTi's ConnextDDS in future projects without heavy needing licences/Connext installation.
+This project allows building an easy to use static library (or set of) along with exported headers to easily make use of RTi's ConnextDDS in future project. It removes the need for licences and full ConnextDDS installation. Additionally it demonstrates (in examples) how to use CMake for crossplatform DDS integration that circumvents the need for proprietary tools like rtiddsgen (Hint: Those annoying preprocessor definitions).
 
-This project also includes an example that makes use of these resources with a CMake that demonstrates crossplatform DDS integration with necessary flags (eg preprocessor definitions)
 ## Requirements
 1. It's required for RTi DDS Connext to be installed on your device. Specifically, the header files and libraries 
   "nddscpp2z"
