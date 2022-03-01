@@ -71,6 +71,7 @@ cmake ../
 3. Build project 
 `cmake --build . --config=<Debug|Release>` 
 4. Run DynamicTypes
+
 Windows
 ```
 cd out
