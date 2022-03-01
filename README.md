@@ -26,7 +26,7 @@ cmake -DPLATFORM=<PLATFORM> ../
 
 ## Using Static Library in Projects
 On Windows, a bundled library will be produced which will remove the need to link core rti libs.
-On UNIX, the ar binary does not support this (doesnt create index). Support will need to be added (See (here)[https://stackoverflow.com/questions/54249128/ar-command-does-not-produce-index-when-combining-static-libraries])
+On UNIX, the ar binary does not support this (doesnt create index). Support will need to be added (See [here](https://stackoverflow.com/questions/54249128/ar-command-does-not-produce-index-when-combining-static-libraries])
 As a result, core rti libs will need to be linked. These are conveniently exported into the build/out folder 
 ### Debug
 1. To use DDSInterface in external projects, the following should be done:
