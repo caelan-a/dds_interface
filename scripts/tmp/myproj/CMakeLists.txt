@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION @NEW_PROJECT_NAME_CMAKE_VERSION@)
+cmake_minimum_required(VERSION 3.17)
 
-project(@NEW_PROJECT_NAME@ VERSION @NEW_PROJECT_VERSION@)
+project(myproj VERSION 0.1)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
 
@@ -8,7 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for e
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake") 
 include(dds_interface_integration)
 
-add_executable(${PROJECT_NAME} @PROJECT_NAME@.cpp @PROJECT_NAME@.hpp)
+add_executable(${PROJECT_NAME} myproj.cpp myproj.hpp)
 
 # Integrate DDS libraries and headers
 integrate_dds_interface(${PROJECT_NAME})
