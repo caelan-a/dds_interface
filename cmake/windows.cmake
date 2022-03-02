@@ -38,13 +38,13 @@ target_compile_definitions(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PRIVATE
 
 #     # Create library targets for RTi debug and release libs
 #     foreach(CORE_RTI_LIB IN LISTS CORE_RTI_LIBS CORE_RTI_LIBS_DEBUG)
-#     getPlatformLibWithExtension("${CORE_RTI_LIB}" LIB_WITH_EXTENSION)
+#     get_platform_with_lib_extension("${CORE_RTI_LIB}" LIB_WITH_EXTENSION)
 #     add_library(${CORE_RTI_LIB} SHARED IMPORTED )
 #     set_target_properties( ${CORE_RTI_LIB} PROPERTIES IMPORTED_LOCATION ${NDDS_HOME}/lib/${PLATFORM}/${LIB_WITH_EXTENSION} IMPORTED_IMPLIB ${NDDS_HOME}/lib/${PLATFORM}/${LIB_WITH_EXTENSION} )
 #     endforeach()
 
 #     # Create custom target for static library combination 
-#     getPlatformLibWithExtension("${PROJECT_NAME}$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>" LIB_WITH_EXTENSION)
+#     get_platform_with_lib_extension("${PROJECT_NAME}$<$<CONFIG:Debug>:${CMAKE_DEBUG_POSTFIX}>" LIB_WITH_EXTENSION)
     
 #     add_custom_target(BundleStaticLibs ALL
 #         COMMAND ${CMAKE_AR} /OUT:$<TARGET_FILE_DIR:${TARGET_DDS_INTERFACE_LIB_STANDALONE}>/"${LIB_WITH_EXTENSION}"
