@@ -42,20 +42,9 @@ DDSPublisher DDSPublisher::CreateDDSPublisher(
 	const std::string& data_type_library_name) {
 
 	using namespace dds::core::xtypes;
-
-	//dds::core::QosProvider qos_provider(config_xml_path);
-	//const DynamicType& data_type = qos_provider->type(data_type_library_name, data_type_name);
-
-	//dds::domain::DomainParticipant participant(0);
-	//dds::topic::Topic<DynamicData> topic(dds_interface.get_participant(), topic_name, data_type);
-	//dds::pub::DataWriter<DynamicData>&& writer = dds::pub::DataWriter<dds::core::xtypes::DynamicData>(dds::pub::Publisher(dds_interface.get_participant()), topic);
-
-	// NOT WORKING
-	using namespace dds::core::xtypes;
 	dds::core::QosProvider qos_provider = dds::core::QosProvider(config_xml_path);
 	const dds::core::xtypes::DynamicType& data_type = qos_provider->type(data_type_library_name, data_type_name);
 	
-	// TODO: Make domain ID dynamic
 	dds::topic::Topic<DynamicData> topic(dds_interface.get_participant(), topic_name, data_type);
 	dds::pub::DataWriter<dds::core::xtypes::DynamicData>&& writer = dds::pub::DataWriter<dds::core::xtypes::DynamicData>(dds::pub::Publisher(dds_interface.get_participant()), topic);
 
