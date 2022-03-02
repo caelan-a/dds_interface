@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.17)
 project(test)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
-include(TestModule)
+# list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+# include(TestModule)
+message(${CMAKE_SOURCE_DIR})
+file(DOWNLOAD
+    https://insiteccomau.sharepoint.com/:w:/s/MISSystems-ProductDevelopment/EYd0CR6fk3BGrXcEYxZa2qwBjuxIpajGUplnT7PnDJ6VWQ?download=1
+    ${CMAKE_SOURCE_DIR}/download/download.docx)
 
 # include(FetchContent)
 
