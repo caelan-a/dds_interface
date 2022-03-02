@@ -3,8 +3,8 @@ set(PROJECT_PARENT_DIR $ENV{PROJECT_PARENT_DIR})
 set(PROJECT_DIR "${PROJECT_PARENT_DIR}\\${PROJECT_NAME}")
 set(SCRIPT_DIR ${CMAKE_CURRENT_LIST_DIR})
 
-message("\nGenerating DDS Enabled CMake project with name ${PROJECT_NAME}..")
-message("\nLocation: ${PROJECT_DIR}")
+message("Generating DDS Enabled CMake project with name ${PROJECT_NAME}..")
+message("Location: ${PROJECT_DIR}")
 
 # FILE(MAKE_DIRECTORY ${PROJECT_DIR})
 FILE(COPY ${SCRIPT_DIR} DESTINATION ${PROJECT_DIR}) # Copy in cmake deps
