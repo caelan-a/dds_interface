@@ -1,4 +1,4 @@
-macro(configure_for_windows TARGET)
+macro(_configure_for_windows TARGET)
     # Add windows specific libs
     set(NATIVE_WIN_LIBS
     "netapi32"
@@ -17,7 +17,7 @@ macro(configure_for_windows TARGET)
 endmacro()
 
 macro(configure_for_executable_windows TARGET)
-    configure_for_windows(${TARGET})
+    _configure_for_windows(${TARGET})
 endmacro()
 
 macro(configure_for_static_library_windows TARGET OUTPUT_DIR)
@@ -31,7 +31,7 @@ macro(configure_for_static_library_windows TARGET OUTPUT_DIR)
     # Set output dir for static libs in release config
     set_target_properties(${TARGET} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${OUTPUT_DIR} )
 
-    configure_for_windows(${TARGET})
+    _configure_for_windows(${TARGET})
 
     target_compile_definitions(${TARGET} PRIVATE NDDS_DLL_VARIABLE)
 endmacro()
