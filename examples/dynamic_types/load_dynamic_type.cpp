@@ -1,18 +1,11 @@
-/*!
- * @file load_dynamic_type.cpp
- * @author Lachlan McAlpine (lachlan.mcalpine@insitec.com.au)
- * @brief
- * @version 1.0
- * @date 2022-02-21
- *
- * @copyright Copyright 2022. This software is protected by copyright, owned by Insitec MIS Pty
- * # Ltd.  Except if and to the extent only expressly permitted at law and subject to any
- * # licence may have from the copyright owner to use the Software, you must not copy,
- * # decompile, reverse engineer, rent, lend, sell, redistribute, sublicense, attempt to
- * # derive the source code of or modify the Software, nor create any derivative works of
- * # the Software.
- *
+/**
+ * @author Caelan Anderson
+ * @email caelan.andsn@gmail.com
+ * @create date 2022-03-02 16:37:58
+ * @modify date 2022-03-02 16:37:58
+ * @desc Example demonstrating usage of DDS Dynamic Data and DDS Interface Wrapper
  */
+
 #include "load_dynamic_type.hpp"
 
 void run_using_dds_interface() {
@@ -25,10 +18,10 @@ void run_using_dds_interface() {
 
     while (true) {
         printf("Sending message\n");
+        std::cout << message << std::endl;
         dds_publisher.publish(message);
         std::cout << "Sleeping for 4s.." << std::endl;
         rti::util::sleep(dds::core::Duration(4));
-        std::cout << "I'm back baby" << std::endl;
     }
 }
 
