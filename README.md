@@ -1,6 +1,6 @@
 
 # DDS Interface
-This project provides tools to make creating projects using of RTi's ConnextDDS as easy as possible.
+This project provides tools to make creating projects using RTi's ConnextDDS as easy as possible.
 
 ## Requirements
 1.  Minimum compiler requirements:
