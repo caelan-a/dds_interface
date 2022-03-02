@@ -16,6 +16,9 @@ integrate_dds_interface(${PROJECT_NAME})
 # Set this target to be default startup project in vs
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 
+# Set working directory as output dir
+set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(OutDir)")
+
 # Copy over message.xml
 set(DDS_TYPE_XML_FILE_NAME "message.xml")
 message("CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")

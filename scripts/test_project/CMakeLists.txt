@@ -9,10 +9,13 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 include(dds_interface_integration)
 
 # Create exe target
-add_executable(${PROJECT_NAME} test_project.cpp test_project.hpp)
+add_executable(${PROJECT_NAME} test_project.cpp test_project.hpp example_message.xml)
 
 # Set target as default startup project
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+
+# Set working directory as output dir
+set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(OutDir)")
 
 # Integrate DDS libraries and headers
 integrate_dds_interface(${PROJECT_NAME})
@@ -21,8 +24,6 @@ integrate_dds_interface(${PROJECT_NAME})
 ###
 ### Start writing your project specific code!
 ###
-
-target_sources(${PROJECT_NAME} PRIVATE example_message.xml)
 
 # Copy over example_message.xml for use by executable. This is here just to support the example publisher code generated
 set(DDS_TYPE_XML_FILE_NAME "example_message.xml")
