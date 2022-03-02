@@ -1,37 +1,50 @@
 cmake_minimum_required(VERSION 3.17)
 
-### USER DEFINED PARAMETERS
-set(ROOT_INCLUDE_DIR ${CMAKE_BINARY_DIR}/../../../build/out/include)
-set(ROOT_LIB_DIR ${CMAKE_BINARY_DIR}/../../../build/out/lib)
-
-# Check if rti headers and libs have been imported into project dir
-if(NOT IS_DIRECTORY "${ROOT_INCLUDE_DIR}")
-  message(FATAL_ERROR "RTi headers have not been imported into project. Please use DDS Interface repo to export and place in at ${ROOT_INCLUDE_DIR}\nChange path at CMakeLists.txt:4")
-endif()
-
-if(NOT IS_DIRECTORY "${ROOT_LIB_DIR}")
-  message(FATAL_ERROR "RTi libs have not been imported into project. Please use DDS Interface repo to export and place in at ${ROOT_LIB_DIR}\nChange path at CMakeLists.txt:5")
-endif()
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)
-
-# Load in NDDSHOME from system environment
-set(NDDS_HOME $ENV{NDDSHOME})
-
 ### CMAKE BEGIN ###
-project(DynamicTypes VERSION 1.1)
+project(DynamicTypes VERSION 0.3)
+
+set(CMAKE_DEBUG_POSTFIX _debug)                                   # Suffix for output files when using --config=Debug
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)   # Output library for static libs
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")  # Custom module dir
+
+# Include modules
+include(platform_tools)
+include(dependency_downloader) 
+
+### Determine compiler and thus RTi platform/libs to use ###
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  message(FATAL_ERROR "RTi libs not available for Clang")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 7.3.0)
+    message("GCC 7.3.0 or higher is present")
+  else()
+    message(FATAL_ERROR "RTi libs not available for GCC version < 7.3.0")
+  endif()
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+  message(FATAL_ERROR "RTi libs not available for intel compiler")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  # using Visual Studio C++
+  if(${MSVC_TOOLSET_VERSION} VERSION_GREATER_EQUAL 141)
+    message("MSVC 2017 or higher is present")
+    set(PLATFORM "x64Win64VS2017")
+  else()
+    message(FATAL_ERROR "RTi libs not available for MSVC version < 2017")
+  endif()
+else()
+  message(FATAL_ERROR "No RTi libs available for compiler: ${CMAKE_CXX_COMPILER_ID}")
+endif()
+
+message("Using RTi platform: ${PLATFORM}")
+
+# Download headers and core RTi libs for given platform
+# Sets RTI_CORE_LIBS_DIR and RTI_HEADERS_DIR
+download_resources_for_rti_platform(${PLATFORM})
 
 ### Create targets ###
-add_executable(${PROJECT_NAME} load_dynamic_type.cpp)
+set(TARGET_DDS_INTERFACE_LIB_STANDALONE "${PROJECT_NAME}")
+add_library(${TARGET_DDS_INTERFACE_LIB_STANDALONE} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
 
-# Set MSVC specific properties
-if ( MSVC )
-    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} )
-    set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} )
-endif ( MSVC )
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
+set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES
     CXX_STANDARD 11
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
@@ -39,74 +52,54 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 ### Specify include directories ###
 set(INCLUDES
-  "${ROOT_INCLUDE_DIR};"
-  "${ROOT_INCLUDE_DIR}/rti_headers;"
-  "${ROOT_INCLUDE_DIR}/rti_headers/ndds;"
-  "${ROOT_INCLUDE_DIR}/rti_headers/ndds/hpp;"
+  "${RTI_HEADERS_DIR}/include;"
+  "${RTI_HEADERS_DIR}/include/ndds;"
+  "${RTI_HEADERS_DIR}/include/ndds/hpp;"
 )
-message("Looking for headers in: ${INCLUDES};")
 
 # Set include directories
-target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDES})
+target_include_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC ${INCLUDES})
+
+set(CORE_RTI_LIBS 
+  "nddscpp2z"
+  "nddscz" 
+  "nddscorez"
+)
+
+set(CORE_RTI_LIBS_DEBUG
+  "nddscpp2zd"
+  "nddsczd" 
+  "nddscorezd"
+)
 
 ### Link libraries ###
+set(ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE
+  ${CORE_RTI_LIBS}
+)
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG
-  "nddscpp2zd"
-  "nddsczd"
-  "nddscorezd"
-  "dds_interface_standalone_debug"
+  ${CORE_RTI_LIBS_DEBUG}
 )
-
-set(ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE
-  "nddscpp2z"
-  "nddscz"
-  "nddscorez"
-  "dds_interface_standalone"
-)
-
-if (WIN32)
-  set(NATIVE_WIN_LIBS
-  "netapi32"
-  "advapi32"
-  "user32"
-  "WS2_32"
-  )
-
-  list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG ${NATIVE_WIN_LIBS})
-  list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE ${NATIVE_WIN_LIBS})
-endif()
-
-target_link_libraries(${PROJECT_NAME} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
-
-# Include pthreads and libdl for unix
-if(UNIX)
-  set(THREADS_PREFER_PTHREAD_FLAG ON)
-  find_package(Threads REQUIRED)
-  target_link_libraries(${PROJECT_NAME} PRIVATE Threads::Threads ${CMAKE_DL_LIBS})
-endif()
 
 # Set link library directories
-message("Looking for libraries in: ${ROOT_LIB_DIR};")
-target_link_directories(${PROJECT_NAME} PUBLIC "${ROOT_LIB_DIR}")
+set(LINK_LIBRARY_DIRS
+  "${RTI_CORE_LIBS_DIR}/${PLATFORM};"
+)
 
-### Copy over resources ### 
-FILE(COPY message.xml DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
-
-### Add preprocessor definitions ###
-target_compile_definitions(${PROJECT_NAME} PUBLIC NDDS_DLL_VARIABLE; _CONSOLE; _SCL_SECURE_NO_WARNINGS;)
-
-# Add platform specific preprocessor definitions
+### Perform platform specific cmake instructions ###
 if(WIN32)
-  target_compile_definitions(${PROJECT_NAME} PRIVATE
-    $<$<CONFIG:Debug>:WIN32_LEAN_AND_MEAN WIN32 RTI_WIN32 _DEBUG>
-    $<$<CONFIG:Release>:WIN32_LEAN_AND_MEAN WIN32 RTI_WIN32>
-  )
+  include(windows)
 elseif(UNIX)
-  target_compile_definitions(${PROJECT_NAME} PUBLIC UNIX; RTI_UNIX; _DEBUG)
+  include(linux)
+else()
+  message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
 endif()
 
-### CPACK
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+### Set linker flags ###
+
+# Set link lib dirs 
+target_link_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC "${LINK_LIBRARY_DIRS}")
+# Set link libs
+target_link_libraries(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
+
+message("Build using: cmake --build . --config=<Debug|Release>")

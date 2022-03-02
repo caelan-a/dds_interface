@@ -11,34 +11,12 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")  # Custom modul
 include(platform_tools)
 include(dependency_downloader) 
 
-### Determine compiler and thus RTi platform/libs to use ###
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  message(FATAL_ERROR "RTi libs not available for Clang")
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-  if(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 7.3.0)
-    message("GCC 7.3.0 or higher is present")
-  else()
-    message(FATAL_ERROR "RTi libs not available for GCC version < 7.3.0")
-  endif()
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
-  message(FATAL_ERROR "RTi libs not available for intel compiler")
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  # using Visual Studio C++
-  if(${MSVC_TOOLSET_VERSION} VERSION_GREATER_EQUAL 141)
-    message("MSVC 2017 or higher is present")
-    set(PLATFORM "x64Win64VS2017")
-  else()
-    message(FATAL_ERROR "RTi libs not available for MSVC version < 2017")
-  endif()
-else()
-  message(FATAL_ERROR "No RTi libs available for compiler: ${CMAKE_CXX_COMPILER_ID}")
-endif()
-
-message("Using RTi platform: ${PLATFORM}")
+get_rti_platform()
+message("Using RTi platform: ${RTI_PLATFORM}")
 
 # Download headers and core RTi libs for given platform
 # Sets RTI_CORE_LIBS_DIR and RTI_HEADERS_DIR
-download_resources_for_rti_platform(${PLATFORM})
+download_resources_for_rti_platform(${RTI_PLATFORM})
 
 ### Create targets ###
 set(TARGET_DDS_INTERFACE_LIB_STANDALONE "${PROJECT_NAME}")
@@ -83,7 +61,7 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG
 
 # Set link library directories
 set(LINK_LIBRARY_DIRS
-  "${RTI_CORE_LIBS_DIR}/${PLATFORM};"
+  "${RTI_CORE_LIBS_DIR}/${RTI_PLATFORM};"
 )
 
 ### Perform platform specific cmake instructions ###

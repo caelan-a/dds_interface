@@ -19,4 +19,4 @@ ECHO Building static library with Release config..
 cmake --build . --config=Release
 
 ECHO:
-ECHO Builds complete! Output libs can be found in /build/out..
+ECHO Builds complete! Output libs can be found in /build/out/lib..

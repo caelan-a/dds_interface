@@ -39,7 +39,7 @@ FetchContent_Declare(
   GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_LIBS_X64LINUX4GCC730} 
 )
 
-# Downloads headers and libs for given RTI_PLATFORM and sets following global variables
+# Downloads headers and libs for given RTI_PLATFORM and sets following parent scope variables
 # for external use: RTI_CORE_LIBS_DIR and RTI_HEADERS_DIR
 function(download_resources_for_rti_platform RTI_PLATFORM)
     # Check if platform is supported. AKA do we have the libs to build against for that platform
