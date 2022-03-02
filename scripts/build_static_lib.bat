@@ -9,10 +9,9 @@ ECHO Creating build directory for cmake generated build files..
 cd %PROJECT_ROOT%
 if not exist "build" mkdir build
 cd %PROJECT_ROOT%/build
-
-ECHO Building static library with Debug config..
 cmake ../
 
+ECHO Building static library with Debug config..
 cmake --build . --config=Debug
 
 ECHO Building static library with Release config..

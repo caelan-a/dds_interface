@@ -17,7 +17,7 @@ message("Using RTi platform: ${RTI_PLATFORM}")
 
 # Download headers and core RTi libs for given platform
 # Sets RTI_CORE_LIBS_DIR and RTI_HEADERS_DIR
-download_resources_for_rti_platform(${PLATFORM})
+download_resources_for_rti_platform(${RTI_PLATFORM})
 
 ### Create targets ###
 set(TARGET_DDS_INTERFACE_LIB_STANDALONE "${PROJECT_NAME}")
