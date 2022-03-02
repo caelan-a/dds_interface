@@ -25,9 +25,9 @@ This process is demonstrated in the `/scripts` directory by `build_static_lib.ba
 
 ## 2 | DDS Enabled Project Generator
 This second use is to streamline the generation of projects that need to use DDS.
-This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled version of the above across platforms. It makes use of modular cmake code to not interfere with project development or integration with legacy code as much as possible.
+This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled DDS Interface wrapper. It makes use of modular cmake code to avoid interfering with project development or integration with legacy code.
 
-This project allows crosscompilation of this static library for linking on windows or linux machines.
+The generated project will support cross compilation on supported platforms
 This process is demonstrated in the `/scripts` directory by `create_project_with_dds.bat` on windows and `create_project_with_dds.sh` on linux (coming soon)
 
 ### How To Use
