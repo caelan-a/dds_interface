@@ -22,6 +22,7 @@ This process is demonstrated in the `/scripts` directory by `build_static_lib.ba
 ./scripts/build_static_lib.bat
 ```
 2. Find output at `build/out/lib`
+3. Manually include in projects or update branch `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload 
 
 ## 2 | DDS Enabled Project Generator
 This second use is to streamline the generation of projects that need to use DDS.
@@ -35,6 +36,8 @@ This process is demonstrated in the `/scripts` directory by `create_project_with
 ```
 ./scripts/create_project_with_dds.bat <project_name>
 ```
+2. Run built executable `/<project_name>/build/out/<config>/<project_name>.exe`
+3. On Windows: Open up `<project_name>/<project_name>.sln` to make full use of Visual Studio development tools 
 
 ## Dependencies
 For all projects that link against DDS (both in this repo and generated ones) CMake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 
