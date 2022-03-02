@@ -4,8 +4,7 @@ This project provides tools to make creating projects using RTi's ConnextDDS as 
 
 ## Requirements
 1.  Minimum compiler requirements:
-    * Windows: MSVC 2017+ \
-      Download [Visual Studio 17 2022 (C++)](https://visualstudio.microsoft.com/vs/) with C++ compiler
+    * Windows: MSVC 2017+ - Download [Visual Studio 17 2022 (C++)](https://visualstudio.microsoft.com/vs/) with C++ compiler
     * Linux: GCC 7.3.0+
 2.  [CMake 3.17+](https://cmake.org/download/)
 ## 1 | DDS Interface Wrapper
