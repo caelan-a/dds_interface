@@ -1,6 +1,6 @@
 @ECHO OFF
 :: This script will generate a new CMake project with RTi DDS core libs and precompiled DDS Interface linked in  
-:: 
+:: Usage: ./create_project_with_dds <project_name>
 
 set CURRENT_DIR="%CD%"
 set SCRIPT_LOCATION=%~dp0

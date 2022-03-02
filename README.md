@@ -1,89 +1,74 @@
 
 # DDS Interface
-This project allows building an easy to use static library (or set of) along with exported headers to easily make use of RTi's ConnextDDS in future projects. It removes the need for licences and full ConnextDDS installation. Additionally it demonstrates (in examples) how to use CMake for crossplatform DDS integration that circumvents the need for proprietary tools like rtiddsgen (Hint: Those annoying preprocessor definitions).
+This project provides tools that make creating projects using of RTi's ConnextDDS as easy as possible.
 
 ## Requirements
-1. It's required for RTi DDS Connext to be installed on your device. Specifically, the header files and libraries 
-  "nddscpp2z"
-  "nddscz"
-  "nddscorez"
-2. Environment variable NDDSHOME be set correctly on system (eg NDDSHOME="C:/Program Files/rti_connext_dds-6.1.0") 
-3. Platform currently tested on 
-    - Windows 10 (x64Win64VS2017)
-    - Ubuntu 18.04 (x64Linux4gcc7.3.0)
-## How To Build
-1. Create directory for generated build files
-```
-mkdir build
-cd build
-```
-2. Generate build files using CMake for specified platform (Eg PLATFORM=x64Win64VS2017)
-```
-cmake -DPLATFORM=<PLATFORM> ../
-```
-3. Build static library for DDS Interface 
-`cmake --build . --config=<Debug|Release>` 
+1.  Minimum compiler requirements:
+    * On Windows, one must have MSVC installed with a minimum version of 2017  
+    * On Linux, one must have GCC installed with a minimum version of 7.3.0
+2.  CMake 3.17+
+## 1 | DDS Interface Wrapper
+The first use of this project is to build a static library that wraps a subset of RTi's ConnextDDS sdk. 
+This has the following benefits:
+* Provide functionality to make use of DynamicData (xml datatypes) safer and easier
+* Abstract away as much boiler plate as possible
 
-## Using Static Library in Projects
-On Windows, a bundled library will be produced which will remove the need to link core rti libs.
-On UNIX, the ar binary does not support this (doesnt create index). Support will need to be added (See [here](https://stackoverflow.com/questions/54249128/ar-command-does-not-produce-index-when-combining-static-libraries])
-As a result, core rti libs will need to be linked. These are conveniently exported into the build/out folder 
-### Debug
-1. To use DDSInterface in external projects, the following should be done:
-* Add link library `dds_interface_debug.lib` to linker 
-* Add link library directory containing `dds_interface_debug.lib` to linker
-* Add the following directories to compiler to look for headers
-`build/include/`
-`build/include/rti_headers`
-`build/include/rti_headers/ndds`
-`build/include/rti_headers/ndds/hpp`
-2. Add preprocessor definitions
-`NDDS_DLL_VARIABLE WIN32_LEAN_AND_MEAN _DEBUG _CONSOLE WIN32 RTI_WIN32 _SCL_SECURE_NO_WARNINGS`
+This project allows crosscompilation of this static library for linking on windows or linux machines.
+This process is demonstrated in the `/scripts` directory by `build_static_lib.bat` on windows and `build_static_lib.sh` on linux (coming soon)
 
-### Release
-1. To use DDSInterface in external projects, the following should be done:
-* Add link library `dds_interface.lib` to linker found in `build/Debug/<PLATFORM>/dds_interface.lib
-* Add link library directory containing `dds_interface.lib` to linker
-* Add the following directories to compiler to look for headers
-`build/include/`
-`build/include/rti_headers`
-`build/include/rti_headers/ndds`
-`build/include/rti_headers/ndds/hpp`
-2. `NDDS_DLL_VARIABLE WIN32_LEAN_AND_MEAN _CONSOLE WIN32 RTI_WIN32 _SCL_SECURE_NO_WARNINGS`
+### How To Use
+1. Run automatic script
+```
+./scripts/build_static_lib.bat
+```
+2. Find output at `build/out/lib`
 
-### Notes
-Use this CMAKE as an example for future DDS enabled projects
-## Example Usage
+## 2 | DDS Enabled Project Generator
+This second use is to streamline the generation of projects that need to use DDS.
+This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled version of the above across platforms. It makes use of modular cmake code to not interfere with project development or integration with legacy code as much as possible.
 
+This project allows crosscompilation of this static library for linking on windows or linux machines.
+This process is demonstrated in the `/scripts` directory by `create_project_with_dds.bat` on windows and `create_project_with_dds.sh` on linux (coming soon)
+
+### How To Use
+1. Run the following tool. The project will be created in the current directory
+```
+./scripts/create_project_with_dds.bat <project_name>
+```
+
+## Dependencies
+For both all projects that link against dds (both in this repo and created ones) cmake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 
+It includes:
+* Full set of RTi ConnextDDS headers
+* Minimal set of RTi core libs
+* Precompiled DDS Interface wrapper libs and headers
+
+The libs are built for specific RTi platforms which are currently limited to:
+* x64Win64VS2017
+* x64Linux4gcc7.3.0
+
+The repo tools will autodetect valid RTi platforms to use and alert the user if none are available. 
+To extend the platforms available and update precompiled libs that all tools will use, please see `cmake/dependency_downloader.cmake` for how and what to update.
+## Example Project
 ### DynamicTypes
-An example project that makes use of the built static library can be found in /examples.
-It requires that the root cmake is run and built to produce the required resources (libs and headers). Once the main project is built, do the following:
-1. `cd examples/dynamic_types`
-2. Make build dir
-```
-mkdir build
-cd build
-```
-2. Generate build files using CMake
-```
-cmake ../
-```
-3. Build project 
-`cmake --build . --config=<Debug|Release>` 
-4. Run DynamicTypes \
+An example project is included which demonstrates the CMakeLists.txt file making use of a modular CMake script to link against DDS dependencies. This project demonstrates the use of DynamicData objects in ConnextDDS which allow sending xml defined messages over the network. 
 
 Windows
 ```
-cd out
-./DynamicTypes.exe
+cd examples/dynamic_types
+./build_example.bat
+./out/<config>/DynamicTypes.exe
+
 ```
 Linux
 ```
-cd out
-./DynamicTypes
+cd examples/dynamic_types
+./build_example.sh
+./out/<config>/DynamicTypes
 ```
-### Using DDSInterface wrapper
 
+## Example API Usage
+### Using DDSInterface wrapper
 ```
 DSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
 DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
