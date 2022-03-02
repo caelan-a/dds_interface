@@ -11,7 +11,7 @@ include(dds_interface_integration)
 # Create exe target
 add_executable(${PROJECT_NAME} @PROJECT_NAME@.cpp @PROJECT_NAME@.hpp)
 
-# Set exe target as default startup project
+# Set target as default startup project
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 
 # Integrate DDS libraries and headers

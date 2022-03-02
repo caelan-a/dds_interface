@@ -23,6 +23,10 @@ download_resources_for_rti_platform(${RTI_PLATFORM})
 set(TARGET_DDS_INTERFACE_LIB_STANDALONE "${PROJECT_NAME}")
 add_library(${TARGET_DDS_INTERFACE_LIB_STANDALONE} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
 
+# Set target as default startup project
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${TARGET_DDS_INTERFACE_LIB_STANDALONE})
+
+
 set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES
     CXX_STANDARD 11
     CXX_STANDARD_REQUIRED YES
