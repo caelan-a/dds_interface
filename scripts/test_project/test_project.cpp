@@ -1,4 +1,4 @@
-#include "@NEW_PROJECT_NAME@.hpp"
+#include "test_project.hpp"
 
 int main(int argc, char **argv) {
 

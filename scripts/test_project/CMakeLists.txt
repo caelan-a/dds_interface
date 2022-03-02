@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION @NEW_PROJECT_NAME_CMAKE_VERSION@)
+cmake_minimum_required(VERSION 3.17)
 
-project(@NEW_PROJECT_NAME@ VERSION @NEW_PROJECT_VERSION@)
+project(test_project VERSION 0.1)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
 
@@ -9,7 +9,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 include(dds_interface_integration)
 
 # Create exe target
-add_executable(${PROJECT_NAME} @PROJECT_NAME@.cpp @PROJECT_NAME@.hpp)
+add_executable(${PROJECT_NAME} test_project.cpp test_project.hpp)
 
 # Set target as default startup project
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
