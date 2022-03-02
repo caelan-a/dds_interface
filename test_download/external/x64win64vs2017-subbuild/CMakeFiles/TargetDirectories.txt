@@ -1,0 +1,3 @@
+C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/x64win64vs2017-subbuild/CMakeFiles/x64win64vs2017-populate.dir
+C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/x64win64vs2017-subbuild/CMakeFiles/ALL_BUILD.dir
+C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/x64win64vs2017-subbuild/CMakeFiles/ZERO_CHECK.dir

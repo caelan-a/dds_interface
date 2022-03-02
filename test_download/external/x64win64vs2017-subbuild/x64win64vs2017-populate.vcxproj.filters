@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\8c83e09e38e1bcb8fcc5e8c025d2a77f\x64win64vs2017-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\a7f7f65c6ea624de3d74128a5968443f\x64win64vs2017-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\a221c69078fab915d37d7b8433400a54\x64win64vs2017-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\x64win64vs2017-subbuild\CMakeFiles\x64win64vs2017-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{4CD96A5D-5FBB-3336-B938-D20878B7866C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
