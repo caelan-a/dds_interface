@@ -69,11 +69,10 @@ set(LINK_LIBRARY_DIRS
 ### Perform platform specific cmake instructions ###
 if(WIN32)
   include(windows)
-  if(MSVC)
-    set_msvc_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE})
-  endif()
+  configure_for_static_library_windows(${TARGET_DDS_INTERFACE_LIB_STANDALONE} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 elseif(UNIX)
   include(linux)
+  configure_for_linux(${TARGET_DDS_INTERFACE_LIB_STANDALONE})
 else()
   message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
 endif()

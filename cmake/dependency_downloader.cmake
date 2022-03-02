@@ -92,7 +92,7 @@ function(download_dds_interface_precompiled_libs_and_headers RTI_PLATFORM)
         FetchContent_MakeAvailable(dds_interface_precompiled_libs_and_headers)
 
         # Set variables for external use
-        set(DDS_INTERFACE_PRECOMPILED_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/dds_interface_precompiled_libs_and_headers-src/lib/${RTI_PLATFORM}" PARENT_SCOPE)
+        set(DDS_INTERFACE_PRECOMPILED_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/dds_interface_precompiled_libs_and_headers-src/lib" PARENT_SCOPE)
         set(DDS_INTERFACE_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/dds_interface_precompiled_libs_and_headers-src/include" PARENT_SCOPE)
 
         message("Success! Downloaded resources can be found at: ${FETCHCONTENT_BASE_DIR}")

@@ -6,10 +6,12 @@
 
 cmake_minimum_required(VERSION 3.17)
 
+## USER PARAM
+set(DDS_TYPE_XML_FILE_NAME "message.xml")
+
 ### CMAKE BEGIN ###
 project(DynamicTypes VERSION 0.3)
 
-set(CMAKE_DEBUG_POSTFIX _debug)                                   # Suffix for output files when using --config=Debug
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../../cmake")  # Custom module dir
@@ -31,10 +33,9 @@ download_resources_for_rti_platform(${RTI_PLATFORM})
 download_dds_interface_precompiled_libs_and_headers(${RTI_PLATFORM})
 
 ### Create targets ###
-set(TARGET_DDS_INTERFACE_LIB_STANDALONE "${PROJECT_NAME}")
-add_library(${TARGET_DDS_INTERFACE_LIB_STANDALONE} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
+add_executable(${PROJECT_NAME} load_dynamic_type.cpp load_dynamic_type.hpp)
 
-set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD 11
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
@@ -49,7 +50,7 @@ set(INCLUDES
 )
 
 # Set include directories
-target_include_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC ${INCLUDES})
+target_include_directories(${PROJECT_NAME} PUBLIC ${INCLUDES})
 
 set(CORE_RTI_LIBS 
   "nddscpp2z"
@@ -77,23 +78,32 @@ set(ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG
 
 # Set link library directories
 set(LINK_LIBRARY_DIRS
-  "${RTI_CORE_LIBS_DIR}/${PLATFORM};"
-  "${DDS_INTERFACE_PRECOMPILED_LIBS_DIR}/${PLATFORM};"
+  "${RTI_CORE_LIBS_DIR}/${RTI_PLATFORM};"
+  "${DDS_INTERFACE_PRECOMPILED_LIBS_DIR}/${RTI_PLATFORM};"
 )
 
 ### Perform platform specific cmake instructions ###
 if(WIN32)
   include(windows)
+  configure_for_executable_windows(${PROJECT_NAME})
 elseif(UNIX)
   include(linux)
+  configure_for_linux(${PROJECT_NAME})
 else()
   message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
 endif()
 
 ### Set linker flags ###
 # Set link lib dirs 
-target_link_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC "${LINK_LIBRARY_DIRS}")
+target_link_directories(${PROJECT_NAME} PUBLIC "${LINK_LIBRARY_DIRS}")
 # Set link libs
-target_link_libraries(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
+target_link_libraries(${PROJECT_NAME} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
+
+# Copy .xml
+message("CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_LIST_DIR}/${DDS_TYPE_XML_FILE_NAME}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>"
+  COMMENT "Copying 'message.xml' to '${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>'"
+  )
 
 message("Build using: cmake --build . --config=<Debug|Release>")
