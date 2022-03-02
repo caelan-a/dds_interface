@@ -1,0 +1,150 @@
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/tmp/headers-populate-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-DOWNLOAD.RULE
+setlocal
+cd C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/tmp/headers-populate-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-UPDATE.RULE
+setlocal
+cd C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\headers-src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/tmp/headers-populate-gitupdate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-PATCH.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-CONFIGURE.RULE
+setlocal
+cd C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\headers-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-BUILD.RULE
+setlocal
+cd C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\headers-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-INSTALL.RULE
+setlocal
+cd C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\headers-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\E674E84A1681095D907BC2C20489AF42\HEADERS-POPULATE-TEST.RULE
+setlocal
+cd C:\Users\cande\Desktop\AMMO\tmp\dds_interface\test_download\external\headers-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\A77C59C4DCCF16A102E031F0AAA2C15F\HEADERS-POPULATE-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/CMakeFiles/Debug/headers-populate-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/headers-populate-prefix/src/headers-populate-stamp/Debug/headers-populate-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKEFILES\DE1143DA707E4CD022D6724F0DCD8732\HEADERS-POPULATE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\CANDE\DESKTOP\AMMO\TMP\DDS_INTERFACE\TEST_DOWNLOAD\EXTERNAL\HEADERS-SUBBUILD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild -BC:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild --check-stamp-file C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/external/headers-subbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
