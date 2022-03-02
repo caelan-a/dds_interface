@@ -1,11 +1,18 @@
+# @author Caelan Anderson
+# @email caelan.andsn@gmail.com
+# @create date 2022-03-02 13:48:33
+# @modify date 2022-03-02 13:48:42
+# @desc This CMake supports windows and linux and integrates core rti DDS libs in addition to the DDS Interface convenience wrapper 
+
 cmake_minimum_required(VERSION 3.17)
 
 ### CMAKE BEGIN ###
 project(DynamicTypes VERSION 0.3)
 
 set(CMAKE_DEBUG_POSTFIX _debug)                                   # Suffix for output files when using --config=Debug
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)   # Output library for static libs
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")  # Custom module dir
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../../cmake")  # Custom module dir
 
 # Include modules
 include(platform_tools)
@@ -17,7 +24,11 @@ message("Using RTi platform: ${RTI_PLATFORM}")
 
 # Download headers and core RTi libs for given platform
 # Sets RTI_CORE_LIBS_DIR and RTI_HEADERS_DIR
-download_resources_for_rti_platform(${PLATFORM})
+download_resources_for_rti_platform(${RTI_PLATFORM})
+
+# Downloads headers and libs for given RTI_PLATFORM
+# Sets DDS_INTERFACE_PRECOMPILED_LIBS_DIR DDS_INTERFACE_HEADERS_DIR
+download_dds_interface_precompiled_libs_and_headers(${RTI_PLATFORM})
 
 ### Create targets ###
 set(TARGET_DDS_INTERFACE_LIB_STANDALONE "${PROJECT_NAME}")
@@ -34,6 +45,7 @@ set(INCLUDES
   "${RTI_HEADERS_DIR}/include;"
   "${RTI_HEADERS_DIR}/include/ndds;"
   "${RTI_HEADERS_DIR}/include/ndds/hpp;"
+  "${DDS_INTERFACE_HEADERS_DIR};"
 )
 
 # Set include directories
@@ -54,15 +66,19 @@ set(CORE_RTI_LIBS_DEBUG
 ### Link libraries ###
 set(ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE
   ${CORE_RTI_LIBS}
+  "dds_interface"
 )
 
 set(ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG
   ${CORE_RTI_LIBS_DEBUG}
+  "dds_interface_debug"
 )
+
 
 # Set link library directories
 set(LINK_LIBRARY_DIRS
   "${RTI_CORE_LIBS_DIR}/${PLATFORM};"
+  "${DDS_INTERFACE_PRECOMPILED_LIBS_DIR}/${PLATFORM};"
 )
 
 ### Perform platform specific cmake instructions ###
@@ -75,7 +91,6 @@ else()
 endif()
 
 ### Set linker flags ###
-
 # Set link lib dirs 
 target_link_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC "${LINK_LIBRARY_DIRS}")
 # Set link libs

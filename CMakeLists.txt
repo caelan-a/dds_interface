@@ -4,7 +4,8 @@ cmake_minimum_required(VERSION 3.17)
 project(dds_interface VERSION 0.2)
 
 set(CMAKE_DEBUG_POSTFIX _debug)                                   # Suffix for output files when using --config=Debug
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)   # Output library for static libs
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)   # Output directory for static libs
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")  # Custom module dir
 
 # Include modules
@@ -68,6 +69,9 @@ set(LINK_LIBRARY_DIRS
 ### Perform platform specific cmake instructions ###
 if(WIN32)
   include(windows)
+  if(MSVC)
+    set_msvc_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE})
+  endif()
 elseif(UNIX)
   include(linux)
 else()

@@ -1,17 +1,18 @@
-# Set Visual Studio specific properties
-if ( MSVC )
+
+macro(set_msvc_properties TARGET)
+    # Set Visual Studio specific properties
     # Set suffix for files produced in debug config
-    set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
-    
+    set_target_properties(${TARGET} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+
     # Set output dir for static libs
-    set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
-    
+    set_target_properties(${TARGET} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+
     # Set output dir for static libs in debug config
-    set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} )
-    
+    set_target_properties(${TARGET} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} )
+
     # Set output dir for static libs in release config
-    set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} )
-endif ( MSVC )
+    set_target_properties(${TARGET} PROPERTIES ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} )
+endmacro()
 
 # Add windows specific libs
 set(NATIVE_WIN_LIBS
