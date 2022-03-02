@@ -11,6 +11,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")  # Custom modul
 include(platform_tools)
 include(dependency_downloader) 
 
+# Get RTI Platform. Sets RTI_PLATFORM
 get_rti_platform()
 message("Using RTi platform: ${RTI_PLATFORM}")
 
