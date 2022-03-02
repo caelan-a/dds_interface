@@ -14,8 +14,8 @@ add_executable(${PROJECT_NAME} @PROJECT_NAME@.cpp @PROJECT_NAME@.hpp example_mes
 # Set target as default startup project
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
 
-# Set working directory as output dir
-set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(OutDir)")
+# Set working directory as the root of the project so VSCode is using the most logical spot for new resources
+set_property(TARGET ${PROJECT_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/..")
 
 # Integrate DDS libraries and headers
 integrate_dds_interface(${PROJECT_NAME})
