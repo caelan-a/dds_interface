@@ -27,7 +27,7 @@ This process is demonstrated in the `/scripts` directory by `build_static_lib.ba
 This second use is to streamline the generation of projects that need to use DDS.
 This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled DDS Interface wrapper. It makes use of modular cmake code to avoid interfering with project development or integration with legacy code.
 
-The generated project will support cross compilation on supported platforms
+The generated project will support cross compilation on supported platforms.
 This process is demonstrated in the `/scripts` directory by `create_project_with_dds.bat` on windows and `create_project_with_dds.sh` on linux (coming soon)
 
 ### How To Use
@@ -37,8 +37,8 @@ This process is demonstrated in the `/scripts` directory by `create_project_with
 ```
 
 ## Dependencies
-For both all projects that link against dds (both in this repo and created ones) cmake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 
-It includes:
+For all projects that link against DDS (both in this repo and generated ones) CMake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 
+The resources include:
 * Full set of RTi ConnextDDS headers
 * Minimal set of RTi core libs
 * Precompiled DDS Interface wrapper libs and headers
@@ -48,7 +48,7 @@ The libs are built for specific RTi platforms which are currently limited to:
 * x64Linux4gcc7.3.0
 
 The repo tools will autodetect valid RTi platforms to use and alert the user if none are available. 
-To extend the platforms available and update precompiled libs that all tools will use, please see `cmake/dependency_downloader.cmake` for how and what to update.
+To extend the platforms available and update precompiled libs that all tools will use, please see `cmake/dependency_downloader.cmake` for how and what to update. Additionally, if this git is being migrated, `cmake/dependency_downloader.cmake` will need to be updated with new commit tags to find said resources.
 ## Example Project
 ### DynamicTypes
 An example project is included which demonstrates the CMakeLists.txt file making use of a modular CMake script to link against DDS dependencies. This project demonstrates the use of DynamicData objects in ConnextDDS which allow sending xml defined messages over the network. 
