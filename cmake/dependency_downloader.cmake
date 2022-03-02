@@ -28,24 +28,31 @@ FetchContent_Declare(
   rti_headers
   GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
   GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_HEADERS}
+  BUILD_COMMAND ""
 )
 
 FetchContent_Declare(
   x64Win64VS2017
   GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
   GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_LIBS_X64WIN64VS2017}
+  BUILD_COMMAND ""
+
 )
 
 FetchContent_Declare(
   x64Linux4gcc7.3.0
   GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
   GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_LIBS_X64LINUX4GCC730} 
+  BUILD_COMMAND ""
 )
 
+# 'diwrapper_deps' => dds_interface (wrapper) precompiled libs and headers. 
+# Name was shortened as it was maxing out 260char path limit on win
 FetchContent_Declare(
-  dds_interface_precompiled_libs_and_headers
+  diwrapper_deps
   GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
   GIT_TAG        ${RESOURCE_COMMIT_TAG_DDS_INTERFACE_PRECOMPILED_LIBS_AND_HEADERS}
+  BUILD_COMMAND ""
 )
 
 # Downloads headers and libs for given RTI_PLATFORM and sets following parent scope variables
@@ -89,11 +96,11 @@ function(download_dds_interface_precompiled_libs_and_headers RTI_PLATFORM)
     # FetchContent will download resources from git. It will check first to see if already downloaded. Very handy :)
     if(${PLATFORM_SUPPORTED})
         message("Downloading DDS Interface precompiled libs and headers for ${RTI_PLATFORM}..")
-        FetchContent_MakeAvailable(dds_interface_precompiled_libs_and_headers)
 
+        FetchContent_MakeAvailable(diwrapper_deps) 
         # Set variables for external use
-        set(DDS_INTERFACE_PRECOMPILED_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/dds_interface_precompiled_libs_and_headers-src/lib" PARENT_SCOPE)
-        set(DDS_INTERFACE_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/dds_interface_precompiled_libs_and_headers-src/include" PARENT_SCOPE)
+        set(DDS_INTERFACE_PRECOMPILED_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/diwrapper_deps-src/lib" PARENT_SCOPE)
+        set(DDS_INTERFACE_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/diwrapper_deps-src/include" PARENT_SCOPE)
 
         message("Success! Downloaded resources can be found at: ${FETCHCONTENT_BASE_DIR}")
     else()

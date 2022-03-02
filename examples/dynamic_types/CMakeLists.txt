@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 
-project(NewProject VERSION 0.1)
+project(DynamicTypes VERSION 0.1)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
 
