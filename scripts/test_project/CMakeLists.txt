@@ -22,6 +22,8 @@ integrate_dds_interface(${PROJECT_NAME})
 ### Start writing your project specific code!
 ###
 
+target_sources(${PROJECT_NAME} PRIVATE example_message.xml)
+
 # Copy over example_message.xml for use by executable. This is here just to support the example publisher code generated
 set(DDS_TYPE_XML_FILE_NAME "example_message.xml")
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

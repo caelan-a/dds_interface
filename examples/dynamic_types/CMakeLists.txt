@@ -13,6 +13,9 @@ add_executable(${PROJECT_NAME} load_dynamic_type.cpp load_dynamic_type.hpp)
 # Integrate DDS libraries and headers
 integrate_dds_interface(${PROJECT_NAME})
 
+# Set this target to be default startup project in vs
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+
 # Copy over message.xml
 set(DDS_TYPE_XML_FILE_NAME "message.xml")
 message("CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
