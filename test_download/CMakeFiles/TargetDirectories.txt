@@ -1,2 +1,0 @@
-C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/CMakeFiles/ALL_BUILD.dir
-C:/Users/cande/Desktop/AMMO/tmp/dds_interface/test_download/CMakeFiles/ZERO_CHECK.dir

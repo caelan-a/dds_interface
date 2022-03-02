@@ -1,5 +1,3 @@
-message("Building for Windows")
-
 # Set Visual Studio specific properties
 if ( MSVC )
     # Set suffix for files produced in debug config
