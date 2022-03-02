@@ -13,7 +13,7 @@ This has the following benefits:
 * Provide functionality to make use of DynamicData (xml datatypes) safer and easier
 * Abstract away as much boiler plate as possible
 
-This project allows crosscompilation of this static library for linking on windows or linux machines.
+The project allows cross-compilation of the static library for linking on windows or linux machines.
 This process is demonstrated in the `/scripts` directory by `build_static_lib.bat` on windows and `build_static_lib.sh` on linux (coming soon)
 
 ### How To Use
