@@ -47,7 +47,6 @@ The DDS Interface wrapper provides the following benefits:
 * Abstract away as much boiler plate as possible
 
 The project allows cross-compilation of the static library for linking on windows or linux machines.
-This process is demonstrated in the tool `/scripts/build_static_lib.*` 
 
 ### How To Build
 #### Windows
