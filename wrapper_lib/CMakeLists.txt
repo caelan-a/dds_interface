@@ -20,13 +20,13 @@ message("Using RTi platform: ${RTI_PLATFORM}")
 download_resources_for_rti_platform(${RTI_PLATFORM})
 
 ### Create targets ###
-set(TARGET_DDS_INTERFACE_LIB_STANDALONE "${PROJECT_NAME}")
-add_library(${TARGET_DDS_INTERFACE_LIB_STANDALONE} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
+set(STATIC_LIB_TARGET "BuildStaticLib")
+add_library(${STATIC_LIB_TARGET} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
 
 # Set target as default startup project
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${TARGET_DDS_INTERFACE_LIB_STANDALONE})
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${STATIC_LIB_TARGET})
 
-set_target_properties(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PROPERTIES
+set_target_properties(${STATIC_LIB_TARGET} PROPERTIES
     CXX_STANDARD 11
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
@@ -40,7 +40,7 @@ set(INCLUDES
 )
 
 # Set include directories
-target_include_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC ${INCLUDES})
+target_include_directories(${STATIC_LIB_TARGET} PUBLIC ${INCLUDES})
 
 set(CORE_RTI_LIBS 
   "nddscpp2z"
@@ -71,19 +71,19 @@ set(LINK_LIBRARY_DIRS
 ### Perform platform specific cmake instructions ###
 if(WIN32)
   include(windows)
-  configure_for_static_library_windows(${TARGET_DDS_INTERFACE_LIB_STANDALONE} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+  configure_for_static_library_windows(${STATIC_LIB_TARGET} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 elseif(UNIX)
   include(linux)
-  configure_for_linux(${TARGET_DDS_INTERFACE_LIB_STANDALONE} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
+  configure_for_linux(${STATIC_LIB_TARGET} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
 else()
   message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
 endif()
 
 ### Set linker flags ###
 # Set link lib dirs 
-target_link_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC "${LINK_LIBRARY_DIRS}")
+target_link_directories(${STATIC_LIB_TARGET} PUBLIC "${LINK_LIBRARY_DIRS}")
 # Set link libs
-target_link_libraries(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
+target_link_libraries(${STATIC_LIB_TARGET} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
 
 
 ### Add executable target to test code ###
