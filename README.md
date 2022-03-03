@@ -13,7 +13,7 @@ The primary use of this project is to streamline the generation of projects that
 This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled library of the DDS Interface wrapper below. It makes use of modular CMake scripts to avoid interfering with project development.
 
 The generated project can be cross-compiled on supported platforms.
-This process is demonstrated through the tool `/scripts/create_project_with_dds.*bat`
+This process is demonstrated through the tool `/scripts/create_project_with_dds.*`
 
 ### How To Use
 
