@@ -24,9 +24,6 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         "${RTI_HEADERS_DIR}/include/ndds/hpp;"
     )
 
-    # Set include directories
-    target_include_directories(${TARGET} PUBLIC ${INCLUDES})
-
     set(CORE_RTI_LIBS 
         "nddscpp2z"
         "nddscz" 
@@ -63,6 +60,8 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         download_dds_interface_precompiled_libs_and_headers(${RTI_PLATFORM})
 
         list(APPEND INCLUDES "${DDS_INTERFACE_HEADERS_DIR};")
+        message("DDS_INTERFACE_HEADERS_DIR: ${DDS_INTERFACE_HEADERS_DIR}")
+        message("INCLUDES: ${INCLUDES}")
         list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE "dds_interface")
         list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG "dds_interface_debug")
         list(APPEND LINK_LIBRARY_DIRS "${DDS_INTERFACE_PRECOMPILED_LIBS_DIR}/${RTI_PLATFORM};")
@@ -82,7 +81,9 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
     endif()
 
-    ### Set linker flags ###
+    ### Set target properties ###
+    # Set include directories
+    target_include_directories(${TARGET} PUBLIC ${INCLUDES})
     # Set link lib dirs 
     target_link_directories(${TARGET} PUBLIC "${LINK_LIBRARY_DIRS}")
     # Set link libs
