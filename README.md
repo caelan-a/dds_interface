@@ -18,7 +18,7 @@ This process is demonstrated through the tool `/scripts/create_project_with_dds.
 ### How To Use
 
 #### Windows
-1. Run the project generation tool `create_project_with_dds.bat`. The project will be created in the user's current. directory
+1. Use the project generation tool `create_project_with_dds.bat`. The project will be created in the user's current. directory
 ```
 ./scripts/create_project_with_dds.bat <project_name>
 ```
@@ -64,11 +64,11 @@ wrapper_lib/setup.sh
 ```
 2. Build project
 ```
-build.sh
+wrapper_lib/build.sh
 ```
 3. Find generated static library in `wrapper_lib/build/out/lib`
 
-#### Wrapper Development
+### Wrapper Development
 The wrapper solution has 2 projects, one for building the library and another `TestWrapper` to easily test and iterate on the source files.
 
 After building a new static library, to make it available to the project generation tool, update this repo's branch named `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload during build.
