@@ -49,26 +49,28 @@ The DDS Interface wrapper provides the following benefits:
 The project allows cross-compilation of the static library for linking on windows or linux machines.
 This process is demonstrated in the tool `/scripts/build_static_lib.*` 
 
-### How To Use
+### How To Build
 #### Windows
 1. Setup project build environment
 ```
-setup.bat
+wrapper_lib/setup.bat
 ```
-2. Open the generated Visual Code solution at `build/<project_name>.sln` to modify/extend library and build with VS development tools
+2. Open the generated Visual Code solution at `wrapper_lib/build/<project_name>.sln` to modify/extend library and build with VS development tools
 
 #### Linux
 1. Setup project build environment
 ```
-setup.sh
+wrapper_lib/setup.sh
 ```
 2. Build project
 ```
 build.sh
 ```
-3. Find generated static library in `build/out/lib`
+3. Find generated static library in `wrapper_lib/build/out/lib`
 
-#### Notes
+#### Wrapper Development
+The wrapper solution has 2 projects, one for building the library and another `TestWrapper` to easily test and iterate on the source files.
+
 After building a new static library, to make it available to the project generation tool, update this repo's branch named `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload during build.
 Alternatively, one can manually replace a generated projects dependency in `<project_name>/external/diwrapper_deps-src/lib/<rti_platform>`
 
