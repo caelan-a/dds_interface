@@ -38,7 +38,7 @@ This process is demonstrated through the tool `/scripts/create_project_with_dds.
 <project_name>/setup.sh
 ```
 3. In `<project_name>/build` run `cmake --build .` or equivalent make command to build project.
-3. Run executable in `<project_name>/build/out`
+4. Run executable in `<project_name>/build/out`
 
 ## 2 | DDS Interface Wrapper
 The root CMake project allows building a static library that wraps a subset of RTi's ConnextDDS sdk. This library is used by the generated projects described above.
@@ -50,12 +50,27 @@ The project allows cross-compilation of the static library for linking on window
 This process is demonstrated in the tool `/scripts/build_static_lib.*` 
 
 ### How To Use
-1. Run automatic script
+##### Windows
+1. Setup project build environment
 ```
-./scripts/build_static_lib.bat
+setup.bat
 ```
-2. Find output at `build/out/lib`
-3. Manually include in projects or update branch `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload 
+2. Open the generated Visual Code solution at `build/<project_name>.sln` to modify/extend library and build with VS development tools
+
+##### Linux
+1. Setup project build environment
+```
+setup.sh
+```
+2. Build project
+```
+build.sh
+```
+3. Find generated static library in `build/out/lib`
+
+##### Notes
+After building a new static library, to make it available to the project generation tool, update this repo's branch named `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload during build.
+Alternatively, one can manually replace a generated projects dependency in `<project_name>/external/diwrapper_deps-src/lib/<rti_platform>`
 
 ## Dependencies
 For all projects that link against DDS (both in this repo and generated ones) CMake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 
