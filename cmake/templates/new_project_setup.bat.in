@@ -1,0 +1,13 @@
+@ECHO OFF
+:: Builds @NEW_PROJECT_NAME@
+set PROJECT_ROOT=%~dp0
+
+cd %PROJECT_ROOT%
+if not exist "build" mkdir build
+cd build
+
+ECHO Generating build files..
+cmake ../
+
+ECHO ::
+ECHO Open @NEW_PROJECT_NAME@ Visual Code solution at /build/@NEW_PROJECT_NAME@.sln

@@ -7,14 +7,47 @@ This project provides tools to make creating projects using RTi's ConnextDDS as 
     * Windows: MSVC 2017+ | Download [Visual Studio 17 2022 (C++)](https://visualstudio.microsoft.com/vs/) with C++ compiler
     * Linux: GCC 7.3.0+
 2.  [CMake 3.17+](https://cmake.org/download/)
-## 1 | DDS Interface Wrapper
-The first use of this project is to build a static library that wraps a subset of RTi's ConnextDDS sdk. 
-This has the following benefits:
-* Provide functionality to make use of DynamicData (xml datatypes) safer and easier
+
+## 1 | DDS Enabled Project Generator
+The primary use of this project is to streamline the generation of projects that need to use DDS.
+This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled DDS Interface wrapper. It makes use of modular cmake code to avoid interfering with project development or integration with legacy code.
+
+The generated project will support cross compilation on supported platforms.
+This process is demonstrated in the `/scripts` directory by `create_project_with_dds.bat` on windows and `create_project_with_dds.sh` on linux (coming soon)
+
+### How To Use
+
+##### Windows
+1. Run the project generation tool `create_project_with_dds.bat`. The project will be created in the user's current. directory
+```
+./scripts/create_project_with_dds.bat <project_name>
+```
+2. Setup project build environment
+```
+<project_name>/setup.bat
+```
+3. Open the generated Visual Code solution at `<project_name>/build/<project_name>.sln` to modify example code and build with VS development tools
+
+##### Linux
+1. Run the project generation tool `create_project_with_dds.sh`. The project will be created in the user's current directory
+```
+./scripts/create_project_with_dds.bat <project_name>
+```
+2. Setup project build environment
+```
+<project_name>/setup.sh
+```
+3. In `<project_name>/build` run `cmake --build .` or equivalent make command to build project.
+3. Run executable in `<project_name>/build/out`
+
+## 2 | DDS Interface Wrapper
+The root CMake project allows building a static library that wraps a subset of RTi's ConnextDDS sdk. This library is used by the generated projects described above.
+The DDS Interface wrapper provides the following benefits:
+* Provide functionality to make use of DynamicData (xml datatypes) safer and easier. RTi's error handling is lacking at best for this subset of the API.
 * Abstract away as much boiler plate as possible
 
 The project allows cross-compilation of the static library for linking on windows or linux machines.
-This process is demonstrated in the `/scripts` directory by `build_static_lib.bat` on windows and `build_static_lib.sh` on linux (coming soon)
+This process is demonstrated in the tool `/scripts/build_static_lib.*` 
 
 ### How To Use
 1. Run automatic script
@@ -23,21 +56,6 @@ This process is demonstrated in the `/scripts` directory by `build_static_lib.ba
 ```
 2. Find output at `build/out/lib`
 3. Manually include in projects or update branch `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload 
-
-## 2 | DDS Enabled Project Generator
-This second use is to streamline the generation of projects that need to use DDS.
-This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled DDS Interface wrapper. It makes use of modular cmake code to avoid interfering with project development or integration with legacy code.
-
-The generated project will support cross compilation on supported platforms.
-This process is demonstrated in the `/scripts` directory by `create_project_with_dds.bat` on windows and `create_project_with_dds.sh` on linux (coming soon)
-
-### How To Use
-1. Run the following tool. The project will be created in the current directory
-```
-./scripts/create_project_with_dds.bat <project_name>
-```
-2. Run built executable `/<project_name>/build/out/<config>/<project_name>.exe`
-3. On Windows: Open up `<project_name>/<project_name>.sln` to make full use of Visual Studio development tools 
 
 ## Dependencies
 For all projects that link against DDS (both in this repo and generated ones) CMake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 

@@ -19,6 +19,7 @@ configure_file("${SCRIPT_DIR}/templates/new_project_CMakeList.txt.in" ${PROJECT_
 configure_file("${SCRIPT_DIR}/templates/new_project.cpp.in" ${PROJECT_DIR}/${NEW_PROJECT_NAME}.cpp @ONLY)
 configure_file("${SCRIPT_DIR}/templates/new_project.hpp.in" ${PROJECT_DIR}/${NEW_PROJECT_NAME}.hpp @ONLY)
 configure_file("${SCRIPT_DIR}/templates/new_project_build.bat.in" ${PROJECT_DIR}/build.bat @ONLY)
+configure_file("${SCRIPT_DIR}/templates/new_project_setup.bat.in" ${PROJECT_DIR}/setup.bat @ONLY)
 configure_file("${SCRIPT_DIR}/templates/new_project_example_message.xml.in" ${PROJECT_DIR}/example_message.xml @ONLY)
 # Add in linux build script               
 
