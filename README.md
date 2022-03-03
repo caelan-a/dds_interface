@@ -13,11 +13,11 @@ The primary use of this project is to streamline the generation of projects that
 This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled library of the DDS Interface wrapper below. It makes use of modular CMake scripts to avoid interfering with project development.
 
 The generated project can be cross-compiled on supported platforms.
-This process is demonstrated through the tool `/scripts/create_project_with_dds.*bat*`
+This process is demonstrated through the tool `/scripts/create_project_with_dds.*bat`
 
 ### How To Use
 
-##### Windows
+#### Windows
 1. Run the project generation tool `create_project_with_dds.bat`. The project will be created in the user's current. directory
 ```
 ./scripts/create_project_with_dds.bat <project_name>
@@ -28,7 +28,7 @@ This process is demonstrated through the tool `/scripts/create_project_with_dds.
 ```
 3. Open the generated Visual Code solution at `<project_name>/build/<project_name>.sln` to modify example code and build with VS development tools
 
-##### Linux
+#### Linux
 1. Run the project generation tool `create_project_with_dds.sh`. The project will be created in the user's current directory
 ```
 ./scripts/create_project_with_dds.bat <project_name>
@@ -50,14 +50,14 @@ The project allows cross-compilation of the static library for linking on window
 This process is demonstrated in the tool `/scripts/build_static_lib.*` 
 
 ### How To Use
-##### Windows
+#### Windows
 1. Setup project build environment
 ```
 setup.bat
 ```
 2. Open the generated Visual Code solution at `build/<project_name>.sln` to modify/extend library and build with VS development tools
 
-##### Linux
+#### Linux
 1. Setup project build environment
 ```
 setup.sh
@@ -68,7 +68,7 @@ build.sh
 ```
 3. Find generated static library in `build/out/lib`
 
-##### Notes
+#### Notes
 After building a new static library, to make it available to the project generation tool, update this repo's branch named `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload during build.
 Alternatively, one can manually replace a generated projects dependency in `<project_name>/external/diwrapper_deps-src/lib/<rti_platform>`
 
