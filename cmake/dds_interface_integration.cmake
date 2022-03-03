@@ -1,4 +1,4 @@
-function(integrate_dds_interface TARGET)
+function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
     # Include modules
     include(platform_tools)
     include(dependency_downloader) 
@@ -11,10 +11,6 @@ function(integrate_dds_interface TARGET)
     # Sets RTI_CORE_LIBS_DIR and RTI_HEADERS_DIR
     download_resources_for_rti_platform(${RTI_PLATFORM})
 
-    # Downloads headers and libs for given RTI_PLATFORM
-    # Sets DDS_INTERFACE_PRECOMPILED_LIBS_DIR DDS_INTERFACE_HEADERS_DIR
-    download_dds_interface_precompiled_libs_and_headers(${RTI_PLATFORM})
-
     set_target_properties(${TARGET} PROPERTIES
         CXX_STANDARD 11
         CXX_STANDARD_REQUIRED YES
@@ -26,7 +22,6 @@ function(integrate_dds_interface TARGET)
         "${RTI_HEADERS_DIR}/include;"
         "${RTI_HEADERS_DIR}/include/ndds;"
         "${RTI_HEADERS_DIR}/include/ndds/hpp;"
-        "${DDS_INTERFACE_HEADERS_DIR};"
     )
 
     # Set include directories
@@ -47,20 +42,34 @@ function(integrate_dds_interface TARGET)
     ### Link libraries ###
     set(ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE
         ${CORE_RTI_LIBS}
-        "dds_interface"
     )
 
     set(ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG
         ${CORE_RTI_LIBS_DEBUG}
-        "dds_interface_debug"
     )
 
 
     # Set link library directories
     set(LINK_LIBRARY_DIRS
         "${RTI_CORE_LIBS_DIR}/${RTI_PLATFORM};"
-        "${DDS_INTERFACE_PRECOMPILED_LIBS_DIR}/${RTI_PLATFORM};"
     )
+
+    # If integrating with DDS Interface wrapper library, add headers and libs appropriately
+    if(WITH_WRAPPER_LIB)
+        message("Integrating DDS with DDS Interface wrapper lib")
+        
+        # Downloads headers and libs for given RTI_PLATFORM
+        # Sets DDS_INTERFACE_PRECOMPILED_LIBS_DIR DDS_INTERFACE_HEADERS_DIR
+        download_dds_interface_precompiled_libs_and_headers(${RTI_PLATFORM})
+
+        list(APPEND INCLUDES "${DDS_INTERFACE_HEADERS_DIR};")
+        list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE "dds_interface")
+        list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG "dds_interface_debug")
+        list(APPEND LINK_LIBRARY_DIRS "${DDS_INTERFACE_PRECOMPILED_LIBS_DIR}/${RTI_PLATFORM};")
+    else()
+        message("Integrating DDS with only core RTi libs")
+    endif()
+
 
     ### Perform platform specific cmake instructions ###
     if(WIN32)

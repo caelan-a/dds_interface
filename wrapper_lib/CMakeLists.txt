@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.17)
 
 ### CMAKE BEGIN ###
-project(dds_interface VERSION 0.2)
+project(dds_wrapper_library VERSION 0.3)
 
 set(CMAKE_DEBUG_POSTFIX _debug)                                   # Suffix for output files when using --config=Debug
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)   # Output library for static libs
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")  # Custom module dir
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")  # Custom module dir
 
 # Include modules
 include(platform_tools)
@@ -84,5 +84,29 @@ endif()
 target_link_directories(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC "${LINK_LIBRARY_DIRS}")
 # Set link libs
 target_link_libraries(${TARGET_DDS_INTERFACE_LIB_STANDALONE} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
+
+
+### Add executable target to test code ###
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
+set(EXECUTABLE_TARGET_NAME "TestWrapper")
+
+# Include modules
+include(dds_interface_integration)
+
+add_executable(${EXECUTABLE_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h test_wrapper_library.cpp test_message.xml)
+
+# Integrate DDS libraries and headers (FALSE argument means core libs ONLY, not previously compiled wrapper library to avoid link conflict)
+integrate_dds_interface(${EXECUTABLE_TARGET_NAME} FALSE)
+
+# Set working directory as the root of the project so VSCode is using the most logical spot for new resources
+set_property(TARGET ${EXECUTABLE_TARGET_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/..")
+
+# Copy over message.xml
+set(DDS_TYPE_XML_FILE_NAME "test_message.xml")
+message("CMAKE_CURRENT_LIST_DIR: ${CMAKE_CURRENT_LIST_DIR}")
+add_custom_command(TARGET ${EXECUTABLE_TARGET_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_LIST_DIR}/${DDS_TYPE_XML_FILE_NAME}" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>"
+  COMMENT "Copying 'message.xml' to '${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>'"
+)
 
 message("Build using: cmake --build . --config=<Debug|Release>")
