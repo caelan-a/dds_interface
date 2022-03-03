@@ -10,10 +10,10 @@ This project provides tools to make creating projects using RTi's ConnextDDS as 
 
 ## 1 | DDS Enabled Project Generator
 The primary use of this project is to streamline the generation of projects that need to use DDS.
-This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled DDS Interface wrapper. It makes use of modular cmake code to avoid interfering with project development or integration with legacy code.
+This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled library of the DDS Interface wrapper below. It makes use of modular CMake scripts to avoid interfering with project development.
 
-The generated project will support cross compilation on supported platforms.
-This process is demonstrated in the `/scripts` directory by `create_project_with_dds.bat` on windows and `create_project_with_dds.sh` on linux (coming soon)
+The generated project can be cross-compiled on supported platforms.
+This process is demonstrated through the tool `/scripts/create_project_with_dds.*bat*`
 
 ### How To Use
 
