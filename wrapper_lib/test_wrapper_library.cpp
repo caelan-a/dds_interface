@@ -4,12 +4,12 @@
 #include <dds/pub/ddspub.hpp>
 #include <dds/sub/ddssub.hpp>
 
-#include <DDSInterface.h>
-#include <DDSPublisher.h>
+#include "DDSInterface.h"
+#include "DDSPublisher.h"
 
 void run_using_dds_interface() {
     DDSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
-    DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
+    DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "test_message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
 
     ////// construct message to send
     dds::core::xtypes::DynamicData message = dds_publisher.create_message();
@@ -27,7 +27,7 @@ void run_using_dds_interface() {
 void run_using_core_libs() {
   using namespace dds::core::xtypes;
 
-    dds::core::QosProvider qos_provider("message.xml");
+    dds::core::QosProvider qos_provider("test_message.xml");
     const DynamicType& mytype = qos_provider->type("topics_lib", "HelloWorld");
 
     dds::domain::DomainParticipant participant(0);
@@ -47,8 +47,6 @@ void run_using_core_libs() {
 }
 
 int main(int argc, char **argv) {
-    std::cout << "Hello";
-    
     //run_using_core_libs();
-    // run_using_dds_interface();
+    run_using_dds_interface();
 }
