@@ -1,5 +1,12 @@
 #include "DDSPublisher.h"
 
+// Util functions. TODO: Refactor into utils class
+bool file_exists(const std::string& name) {
+	struct stat buffer;
+	return (stat(name.c_str(), &buffer) == 0);
+}
+
+
 DDSPublisher::DDSPublisher(
 	const std::string& config_xml_path,
 	const std::string& topic_name,
@@ -42,6 +49,10 @@ DDSPublisher DDSPublisher::CreateDDSPublisher(
 	const std::string& data_type_library_name) {
 
 	using namespace dds::core::xtypes;
+	
+	// Make sure file exists to avoid cryptic rti qosprovider exception. Throw our own better one
+	if(!file_exists(config_xml_path)) throw DDSException("No matching file " + config_xml_path + " to use for config_xml_path");
+
 	dds::core::QosProvider qos_provider = dds::core::QosProvider(config_xml_path);
 	const dds::core::xtypes::DynamicType& data_type = qos_provider->type(data_type_library_name, data_type_name);
 	

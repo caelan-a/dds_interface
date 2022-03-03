@@ -8,19 +8,23 @@
 #include "DDSPublisher.h"
 
 void run_using_dds_interface() {
-    DDSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
-    DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "test_message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
+    try {
+        DDSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
+        DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "test_message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
 
-    ////// construct message to send
-    dds::core::xtypes::DynamicData message = dds_publisher.create_message();
-    message.value<std::string>("msg", "yoyo");
+        dds::core::xtypes::DynamicData message = dds_publisher.create_message();
+        message.value<std::string>("msg", "This is a message");
 
-    while (true) {
-        printf("Sending message\n");
-        std::cout << message << std::endl;
-        dds_publisher.publish(message);
-        std::cout << "Sleeping for 4s.." << std::endl;
-        rti::util::sleep(dds::core::Duration(4));
+        while (true) {
+            printf("Sending message\n");
+            std::cout << message << std::endl;
+            dds_publisher.publish(message);
+            std::cout << "Sleeping for 4s.." << std::endl;
+            rti::util::sleep(dds::core::Duration(4));
+        }
+    }
+    catch (DDSException& e) {
+        std::cout << e.what() << std::endl;
     }
 }
 
@@ -45,6 +49,12 @@ void run_using_core_libs() {
         rti::util::sleep(dds::core::Duration(4));
     }
 }
+
+bool file_exists1(const std::string& name) {
+    struct stat buffer;
+    return (stat(name.c_str(), &buffer) == 0);
+}
+
 
 int main(int argc, char **argv) {
     //run_using_core_libs();

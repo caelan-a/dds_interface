@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <exception>
 
 #include <dds/pub/ddspub.hpp>
 #include <rti/util/util.hpp>  // for sleep()
@@ -33,6 +34,8 @@ private:
 	bool should_terminate = false;
 
 public:
+	DDSPublisher();
+		
 	static DDSPublisher CreateDDSPublisher(
 		DDSInterface& dds_interface,
 		const std::string& data_types_xml_file_path,
@@ -54,4 +57,19 @@ public:
 
 	dds::core::xtypes::DynamicData create_message();
 	void publish(const dds::core::xtypes::DynamicData&);
+};
+
+class DDSException : public std::exception
+{
+public:
+	std::string m_msg;
+
+	DDSException(const std::string& msg)
+		: m_msg(msg)
+	{}
+
+	virtual const char* what() const throw()
+	{
+		return m_msg.c_str();;
+	}
 };
