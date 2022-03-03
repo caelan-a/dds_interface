@@ -41,7 +41,7 @@ This process is demonstrated through the tool `/scripts/create_project_with_dds.
 4. Run executable in `<project_name>/build/out`
 
 ## 2 | DDS Interface Wrapper
-The root CMake project allows building a static library that wraps a subset of RTi's ConnextDDS sdk. This library is used by the generated projects described above.
+The CMake project found in `wrapper_lib` allows building a static library that wraps a subset of RTi's ConnextDDS sdk. This library is used by the generated projects described above.
 The DDS Interface wrapper provides the following benefits:
 * Provide functionality to make use of DynamicData (xml datatypes) safer and easier. RTi's error handling is lacking at best for this subset of the API.
 * Abstract away as much boiler plate as possible
