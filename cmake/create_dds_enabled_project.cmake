@@ -23,8 +23,10 @@ configure_file("${SCRIPT_DIR}/templates/new_project_setup.bat.in" ${PROJECT_DIR}
 configure_file("${SCRIPT_DIR}/templates/new_project_example_message.xml.in" ${PROJECT_DIR}/example_message.xml @ONLY)
 # Add in linux build script               
 
-# Delete template folder as its unused
+# Delete unnecessary files/folders
 FILE(REMOVE_RECURSE ${PROJECT_DIR}/cmake/templates)
+FILE(REMOVE ${PROJECT_DIR}/cmake/create_dds_enabled_project.cmake)
+
 
 message("\nSuccess!")
 message("\nSee the repo for examples")
