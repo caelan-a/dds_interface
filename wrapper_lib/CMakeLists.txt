@@ -39,9 +39,6 @@ set(EXECUTABLE_TARGET_NAME "TestWrapper")
 
 add_executable(${EXECUTABLE_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h test_wrapper_library.cpp test_message.xml)
 
-add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../thirdparty/win/pugixml-1.12" "${CMAKE_CURRENT_LIST_DIR}/../thirdparty/win/pugixml-1.12/build" EXCLUDE_FROM_ALL)
-target_link_libraries(${EXECUTABLE_TARGET_NAME} PUBLIC pugixml)
-
 # Set working directory as the root of the project so VSCode is using the most logical spot for new resources
 set_property(TARGET ${EXECUTABLE_TARGET_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/..")
 
