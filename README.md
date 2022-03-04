@@ -104,7 +104,8 @@ cd examples/dynamic_types
 ./build_example.sh
 ./out/<config>/DynamicTypes
 ```
-
+## Notes
+[RTi Guide on XML Dynamic DataTypes for ConnextDDS 6.1.0](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/connext_dds_professional/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStartedGuide.pdf)
 ## Example API Usage
 ### Using DDSInterface wrapper
 ```
