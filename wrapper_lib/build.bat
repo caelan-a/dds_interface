@@ -1,14 +1,15 @@
 @ECHO OFF
 
 ECHO Building static library for DDS Interface on windows..
-set PROJECT_ROOT=%~dp0..
+set PROJECT_ROOT=%~dp0
 ECHO "Project root: %PROJECT_ROOT%"
 ECHO:
 
 cd %PROJECT_ROOT%
 if not exist "build" (
     :: Make sure project has been setup
-    setup.bat
+    ECHO build environment hasnt been generated yet
+    ./setup.bat
 )
 
 ECHO Building static library with Debug config..
