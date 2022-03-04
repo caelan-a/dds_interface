@@ -8,7 +8,7 @@ ECHO:
 cd %PROJECT_ROOT%
 if not exist "build" (
     :: Make sure project has been setup
-    build.bat
+    setup.bat
 )
 
 ECHO Building static library with Debug config..
