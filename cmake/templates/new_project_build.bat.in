@@ -5,8 +5,10 @@ set PROJECT_ROOT=%~dp0
 cd %PROJECT_ROOT%
 if not exist "build" (
     :: Make sure project has been setup
-    setup.bat
+    ./setup.bat
 )
+
+cd build
 
 ECHO Building @NEW_PROJECT_NAME@ in Debug..
 cmake --build . --config=Debug

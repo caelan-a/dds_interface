@@ -11,7 +11,7 @@ set(GIT_REMOTE_WITH_RESOURCES "https://github.com/caelan-a/dds_interface.git")
 # If you get undefined symbols error from using RTi ConnextDDS API functions not in examples you likely need to link
 # in more core libraries. These can be found in RTi installation media. You should manually update the link_libs and lib_dirs 
 # in your cmake project
-set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64WIN64VS2017 "31788483398ca72a09c01053551a3637f0a894ff")
+set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64WIN64VS2017 "208d0d377bfa437f71e70ec7dfd4d08fd7917c0a")
 set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64LINUX4GCC730 "dc2fdabe282b72e9abbe66bed493e8a5e59ace0c")
 
 # Includes res for all supported platforms

@@ -1,4 +1,8 @@
 function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
+    if((NOT WIN32) AND (NOT UNIX))
+        message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
+    endif()    
+
     # Include modules
     include(platform_tools)
     include(dependency_downloader) 
@@ -67,6 +71,12 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         message("Integrating DDS with only core RTi libs")
     endif()
 
+    #  Do windows specific config. Note that it must be before target_link_libraries or it will break. Yet to determine why
+    if(WIN32)
+        include(windows)
+        configure_for_executable_windows(${TARGET})
+    endif()
+
     ### Set target properties ###
     # Set include directories
     target_include_directories(${TARGET} PUBLIC ${INCLUDES})
@@ -75,15 +85,10 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
     # Set link libs
     target_link_libraries(${TARGET} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
 
-    ### Perform platform specific cmake instructions ###
-    if(WIN32)
-        include(windows)
-        configure_for_executable_windows(${TARGET})
-    elseif(UNIX)
+    #  Do linux specific config. Note that it must be after target_link_libraries or it will break. Yet to determine why
+    if(UNIX)
         include(linux)
         configure_for_linux(${TARGET})
-    else()
-        message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
     endif()
 
 endfunction()

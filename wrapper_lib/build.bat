@@ -12,6 +12,8 @@ if not exist "build" (
     ./setup.bat
 )
 
+cd build
+
 ECHO Building static library with Debug config..
 cmake --build . --config=Debug
 
