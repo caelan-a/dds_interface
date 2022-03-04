@@ -59,4 +59,15 @@ int main(int argc, char **argv) {
     catch (DDSException e) {
         std::cout << e.what() << std::endl;
     }
+
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_file("test_message.xml");
+    auto dds_node = doc.select_nodes("dds").first().node();
+
+    for (auto child : dds_node.select_nodes("type_library")) {
+       std::cout << "Type Library: " << child.node().attribute("name").value() << std::endl;
+    }
+
+    std::cout << "Load result: " << result.description() << ", dds: " << doc.child("dds").value() << std::endl;
+
 }
