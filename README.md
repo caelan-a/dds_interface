@@ -77,7 +77,7 @@ Alternatively, one can manually replace a generated projects dependency in `<pro
 For all projects that link against DDS (both in this repo and generated ones) CMake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 
 The resources include:
 * Full set of RTi ConnextDDS headers
-* Minimal set of RTi core libs. **WARNING: To facilitate portability and small executable size, only 3 core libraries are included `nddscorez`, `nddscz` and `nddscpp2z`. This may result in missing symbols for using more advanced ConnextDDS APIs. One can either link them in manually or add them to the branch `rti_deps_<platform>` for cmake autodownloading. This can and should be improved in the future.
+* Minimal set of RTi core libs. **WARNING: To facilitate portability and small executable size, only 3 core libraries are included `nddscorez`, `nddscz` and `nddscpp2z`. This may result in missing symbols for using more advanced ConnextDDS APIs. One can either link them in manually or add them to the branch `rti_deps_<platform>` for cmake autodownloading. This can and should be improved in the future.**
 * Precompiled DDS Interface wrapper libs and headers
 
 The libs are built for specific RTi platforms which are currently limited to:
