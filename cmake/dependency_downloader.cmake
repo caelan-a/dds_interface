@@ -7,13 +7,12 @@ message("RTi Core Dependency Downloader ready for use. Supported platforms: ${SU
 set(GIT_REMOTE_WITH_RESOURCES "https://github.com/caelan-a/dds_interface.git")
 
 # These commit tags are used to download dependencies from the above git needed for building against RTi libraries
-# Note that the RESOURCE_COMMIT_TAG_RTI_LIBS_* resources contain only the minimal set of rti core libs for hosting reasons.
+# Note that the RESOURCE_COMMIT_TAG_RTI_DEPS_* resources contain only the minimal set of rti core libs for hosting reasons.
 # If you get undefined symbols error from using RTi ConnextDDS API functions not in examples you likely need to link
 # in more core libraries. These can be found in RTi installation media. You should manually update the link_libs and lib_dirs 
 # in your cmake project
-set(RESOURCE_COMMIT_TAG_RTI_HEADERS "f4a25b544a6c7f86d452d9da6e334736aa5ca765")
-set(RESOURCE_COMMIT_TAG_RTI_LIBS_X64WIN64VS2017 "31788483398ca72a09c01053551a3637f0a894ff")
-set(RESOURCE_COMMIT_TAG_RTI_LIBS_X64LINUX4GCC730 "c512af4adb6668006f26242e796536ee144ba4bb")
+set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64WIN64VS2017 "31788483398ca72a09c01053551a3637f0a894ff")
+set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64LINUX4GCC730 "dc2fdabe282b72e9abbe66bed493e8a5e59ace0c")
 
 # Includes res for all supported platforms
 set(RESOURCE_COMMIT_TAG_DDS_INTERFACE_PRECOMPILED_LIBS_AND_HEADERS "c0d32b25425406829d75a2577155128641b69e50")
@@ -25,16 +24,9 @@ set(FETCHCONTENT_BASE_DIR ${CMAKE_BINARY_DIR}/external)
 
 # Declare resources that can be downloaded
 FetchContent_Declare(
-  rti_headers
-  GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
-  GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_HEADERS}
-  BUILD_COMMAND ""
-)
-
-FetchContent_Declare(
   x64Win64VS2017
   GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
-  GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_LIBS_X64WIN64VS2017}
+  GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_DEPS_X64WIN64VS2017}
   BUILD_COMMAND ""
 
 )
@@ -42,7 +34,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   x64Linux4gcc7.3.0
   GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
-  GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_LIBS_X64LINUX4GCC730} 
+  GIT_TAG        ${RESOURCE_COMMIT_TAG_RTI_DEPS_X64LINUX4GCC730} 
   BUILD_COMMAND ""
 )
 
@@ -68,16 +60,16 @@ function(download_resources_for_rti_platform RTI_PLATFORM)
     
     # FetchContent will download resources from git. It will check first to see if already downloaded. Very handy :)
     if(${PLATFORM_SUPPORTED})
-        message("Downloading headers and rti core libs for ${RTI_PLATFORM}..")
-        FetchContent_MakeAvailable(${RTI_PLATFORM} rti_headers) 
+        message("Downloading headers and rti core libs and headers for ${RTI_PLATFORM}..")
+        FetchContent_MakeAvailable(${RTI_PLATFORM}) 
 
         # Set variables for external use# FetchContent downloads to directory with dirname that is made LOWERCASE
         # We must return a path to dir with using lowercase(${RTI_PLATFORM}) to make sure unix systems can access properly
         string(TOLOWER ${RTI_PLATFORM} RTI_PLATFORM_LOWERCASE)
         
         # Set variables for external use
-        set(RTI_CORE_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/${RTI_PLATFORM_LOWERCASE}-src" PARENT_SCOPE)
-        set(RTI_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/rti_headers-src" PARENT_SCOPE)
+        set(RTI_CORE_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/${RTI_PLATFORM_LOWERCASE}-src/${RTI_PLATFORM}/lib" PARENT_SCOPE)
+        set(RTI_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/${RTI_PLATFORM_LOWERCASE}-src/${RTI_PLATFORM}/include" PARENT_SCOPE)
 
         message("Success! Downloaded resources can be found at: ${FETCHCONTENT_BASE_DIR}")
         message("Note that only minimal set of rti core libs are included. May need to link in more for advanced RTi Connext API usage")
