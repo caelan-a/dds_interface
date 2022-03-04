@@ -4,24 +4,14 @@
 
  //Util functions. TODO: Refactor into utils class
  bool file_exists(const std::string& name) {
-	
 	 std::ifstream ifile;
-	 ifile.open("b.txt");
+	 ifile.open(name);
 	 if (ifile) {
-		 std::cout << "File exist";
+		 return true;
 	 }
 	 else {
-		 std::cout << "File doesnt exist";
+		 return false;
 	 }
-	#if defined WIN32
-	struct stat buffer;
-	return (stat(name.c_str(), &buffer) == 0);
-	#elif defined UNIX
-	 struct stat buffer;
-	 return (stat(name.c_str(), &buffer) == 0);
-	#else
-	 raise NotImplemented();
-	#endif	
  }
 
 
