@@ -3,103 +3,48 @@ cmake_minimum_required(VERSION 3.17)
 ### CMAKE BEGIN ###
 project(dds_wrapper_library VERSION 0.3)
 
-set(CMAKE_DEBUG_POSTFIX _debug)                                   # Suffix for output files when using --config=Debug
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)   # Output library for static libs
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")  # Custom module dir
-
 # Include modules
-include(platform_tools)
-include(dependency_downloader) 
-
-# Get RTI Platform. Sets RTI_PLATFORM
-get_rti_platform()
-message("Using RTi platform: ${RTI_PLATFORM}")
-
-# Download headers and core RTi libs for given platform
-# Sets RTI_CORE_LIBS_DIR and RTI_HEADERS_DIR
-download_resources_for_rti_platform(${RTI_PLATFORM})
-
-### Create targets ###
-set(STATIC_LIB_TARGET "BuildStaticLib")
-add_library(${STATIC_LIB_TARGET} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
-
-# Set target as default startup project
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${STATIC_LIB_TARGET})
-
-set_target_properties(${STATIC_LIB_TARGET} PROPERTIES
-    CXX_STANDARD 11
-    CXX_STANDARD_REQUIRED YES
-    CXX_EXTENSIONS NO
-)
-
-### Specify include directories ###
-set(INCLUDES
-  "${RTI_HEADERS_DIR}/include;"
-  "${RTI_HEADERS_DIR}/include/ndds;"
-  "${RTI_HEADERS_DIR}/include/ndds/hpp;"
-)
-
-# Set include directories
-target_include_directories(${STATIC_LIB_TARGET} PUBLIC ${INCLUDES})
-
-set(CORE_RTI_LIBS 
-  "nddscpp2z"
-  "nddscz" 
-  "nddscorez"
-)
-
-set(CORE_RTI_LIBS_DEBUG
-  "nddscpp2zd"
-  "nddsczd" 
-  "nddscorezd"
-)
-
-### Link libraries ###
-set(ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE
-  ${CORE_RTI_LIBS}
-)
-
-set(ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG
-  ${CORE_RTI_LIBS_DEBUG}
-)
-
-# Set link library directories
-set(LINK_LIBRARY_DIRS
-  "${RTI_CORE_LIBS_DIR}/${PLATFORM};"
-)
-
-### Perform platform specific cmake instructions ###
-if(WIN32)
-  include(windows)
-  configure_for_static_library_windows(${STATIC_LIB_TARGET} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
-elseif(UNIX)
-  include(linux)
-  configure_for_linux(${STATIC_LIB_TARGET} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
-else()
-  message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
-endif()
-
-### Set linker flags ###
-# Set link lib dirs 
-target_link_directories(${STATIC_LIB_TARGET} PUBLIC "${LINK_LIBRARY_DIRS}")
-# Set link libs
-target_link_libraries(${STATIC_LIB_TARGET} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
-
-
-### Add executable target to test code ###
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
-set(EXECUTABLE_TARGET_NAME "TestWrapper")
-
-# Include modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")   # Custom module dir
 include(dds_interface_integration)
 
-add_executable(${EXECUTABLE_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h test_wrapper_library.cpp test_message.xml)
+set(CMAKE_DEBUG_POSTFIX _debug)                                       # Suffix for output files when using --config=Debug
+
+##################################################################################
+### BuildStaticLib Target - Allows building of static library for external use ###
+##################################################################################
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)       # Output library for static libs
+
+### Create target ###
+set(STATIC_LIB_TARGET_NAME "BuildStaticLib")
+add_library(${STATIC_LIB_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
+
+# Set target as default startup project
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${STATIC_LIB_TARGET_NAME})
+
+# Set library output name
+set_target_properties(${STATIC_LIB_TARGET_NAME} PROPERTIES OUTPUT_NAME "dds_interface")
 
 # Integrate DDS libraries and headers (FALSE argument means core libs ONLY, not previously compiled wrapper library to avoid link conflict)
-integrate_dds_interface(${EXECUTABLE_TARGET_NAME} FALSE)
+integrate_dds_interface(${STATIC_LIB_TARGET_NAME} FALSE)
+
+#####################################################################
+### TestWrapper Target - Allows running of static lib for testing ###
+#####################################################################
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
+
+set(EXECUTABLE_TARGET_NAME "TestWrapper")
+add_executable(${EXECUTABLE_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h test_wrapper_library.cpp test_message.xml)
 
 # Set working directory as the root of the project so VSCode is using the most logical spot for new resources
 set_property(TARGET ${EXECUTABLE_TARGET_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/..")
+
+# Set binary output name
+set_target_properties(${EXECUTABLE_TARGET_NAME} PROPERTIES OUTPUT_NAME "DDSInterfaceTest")
+
+# Integrate DDS libraries and headers (FALSE argument means core libs ONLY, not previously compiled wrapper library to avoid link conflict)
+integrate_dds_interface(${EXECUTABLE_TARGET_NAME} FALSE)
 
 # Copy over message.xml
 set(DDS_TYPE_XML_FILE_NAME "test_message.xml")
