@@ -71,8 +71,12 @@ function(download_resources_for_rti_platform RTI_PLATFORM)
         message("Downloading headers and rti core libs for ${RTI_PLATFORM}..")
         FetchContent_MakeAvailable(${RTI_PLATFORM} rti_headers) 
 
+        # Set variables for external use# FetchContent downloads to directory with dirname that is made LOWERCASE
+        # We must return a path to dir with using lowercase(${RTI_PLATFORM}) to make sure unix systems can access properly
+        string(TOLOWER ${RTI_PLATFORM} RTI_PLATFORM_LOWERCASE)
+        
         # Set variables for external use
-        set(RTI_CORE_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/${RTI_PLATFORM}-src" PARENT_SCOPE)
+        set(RTI_CORE_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/${RTI_PLATFORM_LOWERCASE}-src" PARENT_SCOPE)
         set(RTI_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/rti_headers-src" PARENT_SCOPE)
 
         message("Success! Downloaded resources can be found at: ${FETCHCONTENT_BASE_DIR}")
