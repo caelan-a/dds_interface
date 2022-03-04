@@ -70,7 +70,7 @@ wrapper_lib/build.sh
 ### Wrapper Development
 The wrapper solution has 2 projects, one for building the library and another `TestWrapper` to easily test and iterate on the source files.
 
-After building a new static library, to make it available to the project generation tool, update this repo's branch named `dds_interface_precompiled_libs_and_headers` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload during build.
+After building a new static library, to make it available to the project generation tool, update this repo's branch named `diwrapper_deps_all` and replace git tag in `cmake/dependency_downloader` for cmake to autodownload during build.
 Alternatively, one can manually replace a generated projects dependency in `<project_name>/external/diwrapper_deps-src/lib/<rti_platform>`
 
 ## Dependencies

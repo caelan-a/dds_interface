@@ -61,7 +61,7 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         
         # Downloads headers and libs for given RTI_PLATFORM
         # Sets DDS_INTERFACE_PRECOMPILED_LIBS_DIR DDS_INTERFACE_HEADERS_DIR
-        download_dds_interface_precompiled_libs_and_headers(${RTI_PLATFORM})
+        download_diwrapper_deps_all(${RTI_PLATFORM})
 
         list(APPEND INCLUDES "${DDS_INTERFACE_HEADERS_DIR};")
         list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE "dds_interface")

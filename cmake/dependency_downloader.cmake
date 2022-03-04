@@ -15,7 +15,7 @@ set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64WIN64VS2017 "208d0d377bfa437f71e70ec7dfd4d08
 set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64LINUX4GCC730 "dc2fdabe282b72e9abbe66bed493e8a5e59ace0c")
 
 # Includes res for all supported platforms
-set(RESOURCE_COMMIT_TAG_DDS_INTERFACE_PRECOMPILED_LIBS_AND_HEADERS "0ac6210cd8caf65fc2015d1db7a4c9702bbf8e3d")
+set(RESOURCE_COMMIT_TAG_DIWRAPPER_DEPS_ALL "0ac6210cd8caf65fc2015d1db7a4c9702bbf8e3d")
 
 include(FetchContent)
 
@@ -43,7 +43,7 @@ FetchContent_Declare(
 FetchContent_Declare(
   diwrapper_deps
   GIT_REPOSITORY ${GIT_REMOTE_WITH_RESOURCES}
-  GIT_TAG        ${RESOURCE_COMMIT_TAG_DDS_INTERFACE_PRECOMPILED_LIBS_AND_HEADERS}
+  GIT_TAG        ${RESOURCE_COMMIT_TAG_DIWRAPPER_DEPS_ALL}
   BUILD_COMMAND ""
 )
 
@@ -80,7 +80,7 @@ endfunction()
 
 # Downloads headers and precompiled libs for DDS Interface
 # for external use: DDS_INTERFACE_PRECOMPILED_LIBS_DIR DDS_INTERFACE_HEADERS_DIR
-function(download_dds_interface_precompiled_libs_and_headers RTI_PLATFORM)
+function(download_diwrapper_deps_all RTI_PLATFORM)
     # Check if platform is supported. AKA do we have the libs to build against for that platform
     set(PLATFORM_SUPPORTED FALSE)
     foreach(SUPPORTED_RTI_PLATFORM IN LISTS SUPPORTED_RTI_PLATFORMS)
