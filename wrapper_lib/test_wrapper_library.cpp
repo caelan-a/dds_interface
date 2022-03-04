@@ -50,12 +50,6 @@ void run_using_core_libs() {
     }
 }
 
-bool file_exists1(const std::string& name) {
-    struct stat buffer;
-    return (stat(name.c_str(), &buffer) == 0);
-}
-
-
 int main(int argc, char **argv) {
     //run_using_core_libs();
     run_using_dds_interface();
