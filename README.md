@@ -86,7 +86,7 @@ The libs are built for specific RTi platforms which are currently limited to:
 * x64Linux4gcc7.3.0
 
 The repo tools will autodetect valid RTi platforms to use and alert the user if none are available. 
-To extend the platforms available and update precompiled libs that all tools will use, please see `cmake/dependency_downloader.cmake` for how and what to update. Additionally, if this git is being migrated, `cmake/dependency_downloader.cmake` will need to be updated with new commit tags to find said resources.
+To extend the platforms available and update precompiled libs that all tools will use, please see `cmake/dependency_downloader.cmake` for how and what to update. Additionally, if this git is being migrated, `cmake/dependency_downloader.cmake` will need to be updated with new repo url download dependencies.
 ## Example Project
 ### DynamicTypes
 An example project is included which demonstrates the CMakeLists.txt file making use of a modular CMake script to link against DDS dependencies. This project demonstrates the use of DynamicData objects in ConnextDDS which allow sending xml defined messages over the network. 
