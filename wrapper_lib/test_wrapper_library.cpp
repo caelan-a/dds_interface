@@ -10,7 +10,7 @@
 void run_using_dds_interface() {
     try {
         DDSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
-        DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "test_message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
+        DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "test_messsage.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
 
         dds::core::xtypes::DynamicData message = dds_publisher.create_message();
         message.value<std::string>("msg", "This is a message");
@@ -52,5 +52,11 @@ void run_using_core_libs() {
 
 int main(int argc, char **argv) {
     //run_using_core_libs();
-    run_using_dds_interface();
+
+    try {
+        run_using_dds_interface();
+    }
+    catch (DDSException e) {
+        std::cout << e.what() << std::endl;
+    }
 }
