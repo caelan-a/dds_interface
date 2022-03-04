@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.17)
 ### CMAKE BEGIN ###
 project(dds_wrapper_library VERSION 0.3)
 
+
 # Include modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")   # Custom module dir
 include(dds_interface_integration)
@@ -35,7 +36,11 @@ integrate_dds_interface(${STATIC_LIB_TARGET_NAME} FALSE)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out)   # Output dir for executable
 
 set(EXECUTABLE_TARGET_NAME "TestWrapper")
+
 add_executable(${EXECUTABLE_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h test_wrapper_library.cpp test_message.xml)
+
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/../thirdparty/win/pugixml-1.12" "${CMAKE_CURRENT_LIST_DIR}/../thirdparty/win/pugixml-1.12/build" EXCLUDE_FROM_ALL)
+target_link_libraries(${EXECUTABLE_TARGET_NAME} PUBLIC pugixml)
 
 # Set working directory as the root of the project so VSCode is using the most logical spot for new resources
 set_property(TARGET ${EXECUTABLE_TARGET_NAME} PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$(ProjectDir)/..")
