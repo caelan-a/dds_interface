@@ -23,11 +23,10 @@ dds::domain::DomainParticipant& DDSInterface::get_participant()
 DDSInterface::DDSInterface(int domain_id, int verbosityLevel, dds::domain::DomainParticipant&& participant)
 : 
 	domain_id(domain_id),
-	verbosity(static_cast<rti::config::Verbosity::inner_enum>(verbosityLevel)) ,
 	participant((dds::domain::DomainParticipant&&)participant)
 {
-	//// Sets Connext verbosity to help debugging
-	rti::config::Logger::instance().verbosity(this->verbosity);
+	// //// Sets Connext verbosity to help debugging
+	// rti::config::Logger::instance().verbosity(this->verbosity);
 }
 
 DDSInterface::~DDSInterface()

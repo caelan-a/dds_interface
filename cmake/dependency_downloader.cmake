@@ -94,9 +94,10 @@ function(download_dds_interface_precompiled_libs_and_headers RTI_PLATFORM)
         message("Downloading DDS Interface precompiled libs and headers for ${RTI_PLATFORM}..")
 
         FetchContent_MakeAvailable(diwrapper_deps) 
+
         # Set variables for external use
-        set(DDS_INTERFACE_PRECOMPILED_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/diwrapper_deps-src/lib" PARENT_SCOPE)
-        set(DDS_INTERFACE_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/diwrapper_deps-src/include" PARENT_SCOPE)
+        set(DDS_INTERFACE_PRECOMPILED_LIBS_DIR "${FETCHCONTENT_BASE_DIR}/diwrapper_deps-src/${RTI_PLATFORM}/lib" PARENT_SCOPE)
+        set(DDS_INTERFACE_HEADERS_DIR "${FETCHCONTENT_BASE_DIR}/diwrapper_deps-src/${RTI_PLATFORM}/include" PARENT_SCOPE)
 
         message("Success! Downloaded resources can be found at: ${FETCHCONTENT_BASE_DIR}")
     else()

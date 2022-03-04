@@ -7,7 +7,6 @@
 #include <iostream>
 #include <csignal>
 #include <dds/core/ddscore.hpp>
-#include <ndds/hpp/rti/config/Logger.hpp>
 
 class DDSInterface
 {
@@ -24,7 +23,6 @@ public:
 
 private:
 	const int domain_id;
-	const rti::config::Verbosity verbosity;
 	dds::domain::DomainParticipant participant;
 };
 

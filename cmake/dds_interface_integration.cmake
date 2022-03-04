@@ -60,8 +60,6 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         download_dds_interface_precompiled_libs_and_headers(${RTI_PLATFORM})
 
         list(APPEND INCLUDES "${DDS_INTERFACE_HEADERS_DIR};")
-        message("DDS_INTERFACE_HEADERS_DIR: ${DDS_INTERFACE_HEADERS_DIR}")
-        message("INCLUDES: ${INCLUDES}")
         list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE "dds_interface")
         list(APPEND ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG "dds_interface_debug")
         list(APPEND LINK_LIBRARY_DIRS "${DDS_INTERFACE_PRECOMPILED_LIBS_DIR}/${RTI_PLATFORM};")
