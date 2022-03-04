@@ -2,8 +2,15 @@
 
  //Util functions. TODO: Refactor into utils class
  bool file_exists(const std::string& name) {
- 	struct stat buffer;
- 	return (stat(name.c_str(), &buffer) == 0);
+	#if defined WIN32
+	struct stat buffer;
+	return (stat(name.c_str(), &buffer) == 0);
+	#elif defined(UNIX)
+	 struct stat buffer;
+	 return (stat(name.c_str(), &buffer) == 0);
+	#else
+	raise NotImplemented()
+	#endif	
  }
 
 
