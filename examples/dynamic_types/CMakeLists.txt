@@ -11,7 +11,7 @@ include(dds_interface_integration)
 add_executable(${PROJECT_NAME} load_dynamic_type.cpp load_dynamic_type.hpp)
 
 # Integrate DDS libraries and headers
-integrate_dds_interface(${PROJECT_NAME})
+integrate_dds_interface(${PROJECT_NAME} TRUE)
 
 # Set this target to be default startup project in vs
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
