@@ -4,7 +4,7 @@ list(APPEND SUPPORTED_RTI_PLATFORMS "x64Win64VS2017" "x64Linux4gcc7.3.0")
 
 message("RTi Core Dependency Downloader ready for use. Supported platforms: ${SUPPORTED_RTI_PLATFORMS}")
 
-set(GIT_REMOTE_WITH_RESOURCES "https://github.com/caelan-a/dds_interface.git")
+set(GIT_REMOTE_WITH_RESOURCES "https://dev.azure.com/data6/AMMO/_git/DDS%20Interface")
 
 # These commit tags are used to download dependencies from the above git needed for building against RTi libraries
 # Note that the RESOURCE_COMMIT_TAG_RTI_DEPS_* resources contain only the minimal set of rti core libs for hosting reasons.
@@ -60,7 +60,9 @@ function(download_resources_for_rti_platform RTI_PLATFORM)
     
     # FetchContent will download resources from git. It will check first to see if already downloaded. Very handy :)
     if(${PLATFORM_SUPPORTED})
-        message("Downloading headers and rti core libs and headers for ${RTI_PLATFORM}..")
+        message("Downloading RTi dependencies (headers and core libraries) for ${RTI_PLATFORM}..")
+        message("Fetching from git: ${GIT_REMOTE_WITH_RESOURCES}")
+
         FetchContent_MakeAvailable(${RTI_PLATFORM}) 
 
         # Set variables for external use# FetchContent downloads to directory with dirname that is made LOWERCASE
@@ -91,7 +93,8 @@ function(download_diwrapper_deps_all RTI_PLATFORM)
     
     # FetchContent will download resources from git. It will check first to see if already downloaded. Very handy :)
     if(${PLATFORM_SUPPORTED})
-        message("Downloading DDS Interface precompiled libs and headers for ${RTI_PLATFORM}..")
+        message("Downloading DDS Interface wrapper dependencies for ${RTI_PLATFORM}..")
+        message("Fetching from git: ${GIT_REMOTE_WITH_RESOURCES}")
 
         FetchContent_MakeAvailable(diwrapper_deps) 
 

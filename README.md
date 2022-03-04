@@ -8,7 +8,7 @@ This project provides tools to make creating projects using RTi's ConnextDDS as 
     * Linux: GCC 7.3.0+
 2.  [CMake 3.17+](https://cmake.org/download/)
 
-## 1 | DDS Enabled Project Generator
+## 1 | DDS Project Generator
 The primary use of this project is to streamline the generation of projects that need to use DDS.
 This project allows generating a new project with a completely configured CMakeLists.txt to build against RTi DDS core libs and a precompiled library of the DDS Interface wrapper below. It makes use of modular CMake scripts to avoid interfering with project development.
 
@@ -40,7 +40,7 @@ This process is demonstrated through the tool `/scripts/create_project_with_dds.
 3. In `<project_name>/build` run `cmake --build .` or equivalent make command to build project.
 4. Run executable in `<project_name>/build/out`
 
-## 2 | DDS Interface Wrapper
+## 2 | DDS Interface Wrapper Library
 The CMake project found in `wrapper_lib` allows building a static library that wraps a subset of RTi's ConnextDDS sdk. This library is used by the generated projects described above.
 The DDS Interface wrapper provides the following benefits:
 * Provide functionality to make use of DynamicData (xml datatypes) safer and easier. RTi's error handling is lacking at best for this subset of the API.
@@ -77,7 +77,8 @@ Alternatively, one can manually replace a generated projects dependency in `<pro
 For all projects that link against DDS (both in this repo and generated ones) CMake will attempt to download the required dependencies remotely. These resources (libs and headers) are hosted in branches of this repo for portability and centralisation. 
 The resources include:
 * Full set of RTi ConnextDDS headers
-* Minimal set of RTi core libs
+* Minimal set of RTi core libs. \
+**WARNING: To facilitate portability and small executable size, only 3 core libraries are included `nddscorez`, `nddscz` and `nddscpp2z`. This may result in missing symbols for using more advanced ConnextDDS APIs. One can either link them in manually or add them to the branch `rti_deps_<platform>` for cmake autodownloading. This can and should be improved in the future.**
 * Precompiled DDS Interface wrapper libs and headers
 
 The libs are built for specific RTi platforms which are currently limited to:
