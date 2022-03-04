@@ -13,7 +13,7 @@ void run_using_dds_interface() {
         DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "test_message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
 
         dds::core::xtypes::DynamicData message = dds_publisher.create_message();
-        message.value<std::string>("msg", "This is a message");
+        message.value<std::string>("msg", "yo");
 
         while (true) {
             printf("Sending message\n");
@@ -24,6 +24,9 @@ void run_using_dds_interface() {
         }
     }
     catch (DDSException& e) {
+        std::cout << e.what() << std::endl;
+    }
+    catch (dds::core::Error e) {
         std::cout << e.what() << std::endl;
     }
 }
@@ -59,15 +62,4 @@ int main(int argc, char **argv) {
     catch (DDSException e) {
         std::cout << e.what() << std::endl;
     }
-
-    pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file("test_message.xml");
-    auto dds_node = doc.select_nodes("dds").first().node();
-
-    for (auto child : dds_node.select_nodes("type_library")) {
-       std::cout << "Type Library: " << child.node().attribute("name").value() << std::endl;
-    }
-
-    std::cout << "Load result: " << result.description() << ", dds: " << doc.child("dds").value() << std::endl;
-
 }
