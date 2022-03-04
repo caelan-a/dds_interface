@@ -19,9 +19,9 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
 
     ### Specify include directories ###
     set(INCLUDES
-        "${RTI_HEADERS_DIR}/include;"
-        "${RTI_HEADERS_DIR}/include/ndds;"
-        "${RTI_HEADERS_DIR}/include/ndds/hpp;"
+        "${RTI_HEADERS_DIR};"
+        "${RTI_HEADERS_DIR}/ndds;"
+        "${RTI_HEADERS_DIR}/ndds/hpp;"
     )
 
     set(CORE_RTI_LIBS 
@@ -48,7 +48,7 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
 
     # Set link library directories
     set(LINK_LIBRARY_DIRS
-        "${RTI_CORE_LIBS_DIR}/${RTI_PLATFORM};"
+        "${RTI_CORE_LIBS_DIR}"
     )
 
     # If integrating with DDS Interface wrapper library, add headers and libs appropriately
@@ -69,6 +69,13 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         message("Integrating DDS with only core RTi libs")
     endif()
 
+    ### Set target properties ###
+    # Set include directories
+    target_include_directories(${TARGET} PUBLIC ${INCLUDES})
+    # Set link lib dirs 
+    target_link_directories(${TARGET} PUBLIC "${LINK_LIBRARY_DIRS}")
+    # Set link libs
+    target_link_libraries(${TARGET} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
 
     ### Perform platform specific cmake instructions ###
     if(WIN32)
@@ -81,11 +88,4 @@ function(integrate_dds_interface TARGET WITH_WRAPPER_LIB)
         message(FATAL_ERROR "Unsupported platform for building static library. Exiting..")
     endif()
 
-    ### Set target properties ###
-    # Set include directories
-    target_include_directories(${TARGET} PUBLIC ${INCLUDES})
-    # Set link lib dirs 
-    target_link_directories(${TARGET} PUBLIC "${LINK_LIBRARY_DIRS}")
-    # Set link libs
-    target_link_libraries(${TARGET} PUBLIC debug "${ADDITIONAL_LIBRARY_DEPENDENCIES_DEBUG}" optimized "${ADDITIONAL_LIBRARY_DEPENDENCIES_RELEASE}" )
 endfunction()
