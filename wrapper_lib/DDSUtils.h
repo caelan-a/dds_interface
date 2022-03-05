@@ -12,3 +12,24 @@ public:
 	static bool file_exists(const std::string& name);
 };
 
+class NotImplemented : public std::logic_error
+{
+public:
+	NotImplemented() : std::logic_error("Function not yet implemented") { };
+};
+
+
+class DDSException : public std::exception
+{
+public:
+	std::string m_msg;
+
+	DDSException(const std::string& msg)
+		: m_msg(msg)
+	{}
+
+	virtual const char* what() const throw()
+	{
+		return m_msg.c_str();;
+	}
+};
