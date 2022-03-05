@@ -1,7 +1,6 @@
 #include "DDSPublisher.h"
 #include <fstream>
 #include <iostream>
-#include "pugixml.hpp"
 #include <dds/core/Exception.hpp>
 
 /*
