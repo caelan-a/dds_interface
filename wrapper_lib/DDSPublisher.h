@@ -14,6 +14,11 @@
 #include <rti/config/Logger.hpp>  // for logging
 #include <dds/core/ddscore.hpp>
 
+#include <fstream>
+#include <iostream>
+#include <dds/core/Exception.hpp>
+
+#include "DDSMessage.h"
 #include "DDSInterface.h"
 
 class NotImplemented : public std::logic_error
@@ -61,7 +66,8 @@ public:
 
 	~DDSPublisher();
 
-	dds::core::xtypes::DynamicData create_message();
+	DDSMessage create_message();
+
 	void publish(const dds::core::xtypes::DynamicData&);
 };
 

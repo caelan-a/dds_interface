@@ -1,7 +1,4 @@
 #include "DDSPublisher.h"
-#include <fstream>
-#include <iostream>
-#include <dds/core/Exception.hpp>
 
 /*
 See this document from RTi that describes in detail use of xml defined datatypes:
@@ -45,9 +42,11 @@ DDSPublisher::~DDSPublisher() {
 	std::cout << "Removing DDSPublisher\n";
 }
 
-dds::core::xtypes::DynamicData DDSPublisher::create_message() {
+DDSMessage DDSPublisher::create_message() {
 	dds::core::xtypes::DynamicData sample = dds::core::xtypes::DynamicData(this->data_type);
-	return sample;
+	DDSMessage msg = DDSMessage(sample);
+
+	return msg;
 }
 
 void DDSPublisher::publish(const dds::core::xtypes::DynamicData& message) {
@@ -80,16 +79,6 @@ bool is_data_type_present(const dds::core::QosProvider& qos_provider, const std:
 
 	return false;
 }
-
-//bool is_type_present(type, const std::string& type_library) {
-//	for (auto e : qos_provider->type_libraries()) {
-//		if (type_library == e) {
-//			return true;
-//		}
-//	}
-//	return false;
-//}
-//
 
 DDSPublisher DDSPublisher::CreateDDSPublisher(
 	DDSInterface& dds_interface,
