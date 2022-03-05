@@ -4,6 +4,8 @@
 #include <csignal>
 #include <dds/core/ddscore.hpp>
 
+#include "DDSUtils.h"
+
 class DDSMessage
 {
 

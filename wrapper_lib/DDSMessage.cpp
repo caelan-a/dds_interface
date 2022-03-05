@@ -11,7 +11,7 @@ void DDSMessage::set_string(const std::string& key, const std::string& text)
 		this->dynamic_data.value<std::string>(key, text);
 	}
 	catch (dds::core::Error e) {
-
+		throw DDSException("Failed to set string value");
 	}
 }
 
