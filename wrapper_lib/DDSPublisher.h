@@ -20,6 +20,7 @@
 
 #include "DDSMessage.h"
 #include "DDSInterface.h"
+#include "DDSUtils.h"
 
 class NotImplemented : public std::logic_error
 {

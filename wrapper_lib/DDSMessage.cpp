@@ -7,7 +7,12 @@ DDSMessage::DDSMessage(const dds::core::xtypes::DynamicData& dynamic_data) : dyn
 
 void DDSMessage::set_string(const std::string& key, const std::string& text)
 {
-	this->dynamic_data.value<std::string>(key, text);
+	try {
+		this->dynamic_data.value<std::string>(key, text);
+	}
+	catch (dds::core::Error e) {
+
+	}
 }
 
 void DDSMessage::print() {

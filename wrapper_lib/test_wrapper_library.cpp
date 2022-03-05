@@ -16,8 +16,6 @@ void run_using_dds_interface() {
 
         message.print();
 
-        //message.value<std::string>("msg", "yo");
-
         /*while (true) {
             printf("Sending message\n");
             std::cout << message << std::endl;
