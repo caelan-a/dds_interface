@@ -2,8 +2,8 @@
 
 DDSMessage::DDSMessage(const dds::core::xtypes::DynamicData& dynamic_data) : dynamic_data(dynamic_data)
 {
-
 }
+
 
 void DDSMessage::set_string(const std::string& key, const std::string& text)
 {
@@ -14,6 +14,7 @@ void DDSMessage::set_string(const std::string& key, const std::string& text)
 		throw DDSException("Failed to set string value");
 	}
 }
+
 
 void DDSMessage::print() {
 	std::cout << *this;

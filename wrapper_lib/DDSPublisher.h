@@ -1,9 +1,5 @@
 #pragma once
 
-// IMPORTANT: macros.hpp must be the first RTI header included in every header
-// file so that symbols are exported correctly on Windows
-//#include <dds/core/macros.hpp>
-
 #include <iostream>
 #include <string>
 #include <map>
@@ -22,6 +18,10 @@
 #include "DDSInterface.h"
 #include "DDSUtils.h"
 
+/*
+This class is used to contain and manage all the resources necessary to publish a specific data_type to a specified topic.
+It makes sure all the values given are valid and present during creation.
+*/
 class DDSPublisher
 {
 private:
@@ -63,5 +63,6 @@ public:
 
 	DDSMessage create_message();
 
+	/* Publish message to the DDS network */
 	void publish(DDSMessage& msg);
 };

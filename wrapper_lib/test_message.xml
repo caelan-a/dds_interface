@@ -5,6 +5,7 @@
   <type_library name="topics_lib">
       <struct name= "HelloWorld">
         <member name="msg" stringMaxLength="256" type="string"/>
+		<member name="short_member" type="short"/>
       </struct>
   </type_library>
 </dds>

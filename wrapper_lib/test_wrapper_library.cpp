@@ -13,7 +13,7 @@ void run_using_dds_interface() {
         DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "test_message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
         DDSMessage message = dds_publisher.create_message();
         message.set_string("msg", "hello");
-        message.print();
+        message.set_dynamic_value("short_member", 1);
 
         while (true) {
             printf("Sending the following message\n");

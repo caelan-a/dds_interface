@@ -1,11 +1,5 @@
 #include "DDSPublisher.h"
 
-/*
-See this document from RTi that describes in detail use of xml defined datatypes:
-https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/connext_dds_professional/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStartedGuide.pdf
-*/
-
-
 DDSPublisher::DDSPublisher(
 	const std::string& config_xml_path,
 	const std::string& topic_name,

@@ -25,7 +25,8 @@ DDSInterface::DDSInterface(int domain_id, int verbosityLevel, dds::domain::Domai
 	domain_id(domain_id),
 	participant((dds::domain::DomainParticipant&&)participant)
 {
-	// //// Sets Connext verbosity to help debugging
+	// Commented as causes problems on linux currently
+	// //Sets Connext verbosity to help debugging
 	// rti::config::Logger::instance().verbosity(this->verbosity);
 }
 

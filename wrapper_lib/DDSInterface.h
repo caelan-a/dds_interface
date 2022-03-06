@@ -1,13 +1,12 @@
 #pragma once
 
-// IMPORTANT: macros.hpp must be the first RTI header included in every header
-// file so that symbols are exported correctly on Windows
-//#include <dds/core/macros.hpp>
-
 #include <iostream>
 #include <csignal>
 #include <dds/core/ddscore.hpp>
 
+/*
+This class wraps a participant with some settings that can be used to create multiple publishers
+*/
 class DDSInterface
 {
 
@@ -25,6 +24,3 @@ private:
 	const int domain_id;
 	dds::domain::DomainParticipant participant;
 };
-
-//using namespace dds::core::xtypes;
-//template class dds::core::TQosProvider<rti::core::QosProviderImpl>;

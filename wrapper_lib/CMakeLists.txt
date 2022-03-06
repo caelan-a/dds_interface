@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 
 ### CMAKE BEGIN ###
-project(dds_wrapper_library VERSION 0.3)
-
+project(dds_wrapper_library VERSION 0.4)
 
 # Include modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/../cmake")   # Custom module dir
