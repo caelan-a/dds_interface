@@ -19,6 +19,11 @@ void DDSMessage::print() {
 	std::cout << *this;
 }
 
+dds::core::xtypes::DynamicData& DDSMessage::get_dynamic_data()
+{
+	return this->dynamic_data;
+}
+
 std::ostream& operator<<(std::ostream& os, const DDSMessage& msg)
 {
 	os << "DDSMessage: " << msg.dynamic_data.type().name() << std::endl;

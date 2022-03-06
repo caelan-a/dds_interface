@@ -63,5 +63,5 @@ public:
 
 	DDSMessage create_message();
 
-	void publish(const dds::core::xtypes::DynamicData&);
+	void publish(DDSMessage& msg);
 };

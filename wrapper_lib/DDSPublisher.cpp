@@ -38,8 +38,8 @@ DDSMessage DDSPublisher::create_message() {
 	return msg;
 }
 
-void DDSPublisher::publish(const dds::core::xtypes::DynamicData& message) {
-	this->writer.write(message);
+void DDSPublisher::publish(DDSMessage& message) {
+	this->writer.write(message.get_dynamic_data());
 }
 
 DDSPublisher DDSPublisher::CreateDDSPublisher(

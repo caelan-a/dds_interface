@@ -18,6 +18,9 @@ public:
 
 	void print();
 
+	dds::core::xtypes::DynamicData& get_dynamic_data();
+
+
 	friend std::ostream& operator<<(std::ostream& os, const DDSMessage& msg);
 
 
