@@ -17,7 +17,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/lib)       # Output l
 
 ### Create target ###
 set(STATIC_LIB_TARGET_NAME "BuildStaticLib")
-add_library(${STATIC_LIB_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h)
+add_library(${STATIC_LIB_TARGET_NAME} DDSInterface.cpp DDSInterface.h DDSPublisher.cpp DDSPublisher.h DDSMessage.cpp DDSMessage.h DDSUtils.cpp DDSUtils.h)
 
 # Set target as default startup project
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${STATIC_LIB_TARGET_NAME})
