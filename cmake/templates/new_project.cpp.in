@@ -1,29 +1,27 @@
 #include "@NEW_PROJECT_NAME@.hpp"
 
 int main(int argc, char **argv) {
+        try {
+        DDSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
+        DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, "example_message.xml", "topic_HelloWorld", "HelloWorld", "topics_lib");
+        DDSMessage message = dds_publisher.create_message();
+        message.set_string("msg", "hello");
+        message.set_dynamic_value("short_member", (short)1);
 
-    //
-    //  The following code demonstrates basic usage of the DDS Interface wrapper library!
-    //
+        while (true) {
+            printf("Sending the following message\n");
+            message.print();
 
-    //  Use DDS Interface wrapper to create a convenient xml defined message publisher
-    DDSInterface dds_interface = DDSInterface::CreateDDSInterface(0, 0);
-    DDSPublisher dds_publisher = DDSPublisher::CreateDDSPublisher(dds_interface, 
-                                                                    "example_message.xml", 
-                                                                    "example_topic", 
-                                                                    "example_data_type", 
-                                                                    "example_data_type_library");
+            dds_publisher.publish(message);
 
-    // Create message and set value
-    dds::core::xtypes::DynamicData message = dds_publisher.create_message();
-    message.value<std::string>("example_string_field", "This is an example message! Replace me!");
-
-    // Send a message every 4 seconds 
-    while (true) {
-        printf("Sending message\n");
-        std::cout << message << std::endl;
-        dds_publisher.publish(message);
-        std::cout << "Sleeping for 4s.." << std::endl;
-        rti::util::sleep(dds::core::Duration(4));
+            std::cout << "Sleeping for 4s.." << std::endl;
+            rti::util::sleep(dds::core::Duration(4));
+        }
+    }
+    catch (DDSException& e) {
+        std::cout << e.what() << std::endl;
+    }
+    catch (dds::core::Error e) {
+        std::cout << e.what() << std::endl;
     }
 }

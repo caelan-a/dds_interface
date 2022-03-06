@@ -4,7 +4,7 @@ list(APPEND SUPPORTED_RTI_PLATFORMS "x64Win64VS2017" "x64Linux4gcc7.3.0")
 
 message("RTi Core Dependency Downloader ready for use. Supported platforms: ${SUPPORTED_RTI_PLATFORMS}")
 
-set(GIT_REMOTE_WITH_RESOURCES "https://dev.azure.com/data6/AMMO/_git/DDS%20Interface")
+set(GIT_REMOTE_WITH_RESOURCES "https://github.com/caelan-a/dds_interface")
 
 # These commit tags are used to download dependencies from the above git needed for building against RTi libraries
 # Note that the RESOURCE_COMMIT_TAG_RTI_DEPS_* resources contain only the minimal set of rti core libs for hosting reasons.
@@ -15,7 +15,7 @@ set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64WIN64VS2017 "208d0d377bfa437f71e70ec7dfd4d08
 set(RESOURCE_COMMIT_TAG_RTI_DEPS_X64LINUX4GCC730 "dc2fdabe282b72e9abbe66bed493e8a5e59ace0c")
 
 # Includes res for all supported platforms
-set(RESOURCE_COMMIT_TAG_DIWRAPPER_DEPS_ALL "0ac6210cd8caf65fc2015d1db7a4c9702bbf8e3d")
+set(RESOURCE_COMMIT_TAG_DIWRAPPER_DEPS_ALL "032c26d380a24b50e7dfd58312ca80c896f2cdc4")
 
 include(FetchContent)
 
