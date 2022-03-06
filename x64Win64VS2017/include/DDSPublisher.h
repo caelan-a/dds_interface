@@ -1,20 +1,27 @@
 #pragma once
 
-// IMPORTANT: macros.hpp must be the first RTI header included in every header
-// file so that symbols are exported correctly on Windows
-//#include <dds/core/macros.hpp>
-
 #include <iostream>
 #include <string>
 #include <map>
+#include <exception>
 
 #include <dds/pub/ddspub.hpp>
 #include <rti/util/util.hpp>  // for sleep()
 #include <rti/config/Logger.hpp>  // for logging
 #include <dds/core/ddscore.hpp>
 
-#include "DDSInterface.h"
+#include <fstream>
+#include <iostream>
+#include <dds/core/Exception.hpp>
 
+#include "DDSMessage.h"
+#include "DDSInterface.h"
+#include "DDSUtils.h"
+
+/*
+This class is used to contain and manage all the resources necessary to publish a specific data_type to a specified topic.
+It makes sure all the values given are valid and present during creation.
+*/
 class DDSPublisher
 {
 private:
@@ -33,6 +40,8 @@ private:
 	bool should_terminate = false;
 
 public:
+	DDSPublisher();
+		
 	static DDSPublisher CreateDDSPublisher(
 		DDSInterface& dds_interface,
 		const std::string& data_types_xml_file_path,
@@ -52,6 +61,8 @@ public:
 
 	~DDSPublisher();
 
-	dds::core::xtypes::DynamicData create_message();
-	void publish(const dds::core::xtypes::DynamicData&);
+	DDSMessage create_message();
+
+	/* Publish message to the DDS network */
+	void publish(DDSMessage& msg);
 };
