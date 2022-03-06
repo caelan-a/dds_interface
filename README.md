@@ -106,7 +106,40 @@ cd examples/dynamic_types
 ```
 
 ## Notes
-[RTi Guide on XML Dynamic DataTypes for ConnextDDS 6.1.0](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/connext_dds_professional/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStartedGuide.pdf)
+[RTi Guide on XML Dynamic DataTypes for ConnextDDS 6.1.0 (Uses more C code)](https://community.rti.com/static/documentation/connext-dds/6.1.0/doc/manuals/connext_dds_professional/xml_application_creation/RTI_ConnextDDS_CoreLibraries_XML_AppCreation_GettingStartedGuide.pdf)
+
+## Defining XML DataType
+Datatypes are defined within an xml that is given to DDSPublisher. You can find examples in this repo, however below shows the list of possible member types. See [RTi's maximal list of xml member type definitions](https://community.rti.com/static/documentation/connext-dds/5.2.3/doc/manuals/connext_dds/html_files/RTI_ConnextDDS_CoreLibraries_UsersManual/Content/UsersManual/Creating_User_Data_Types_with_Extensible.htm)
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/6.0.1/rti_dds_qos_profiles.xsd"
+     version="6.0.1">
+  <type_library name="type_lib">
+      <struct name= "AllFieldTypesExample">
+        <member name="msg" stringMaxLength="256" type="string"/>
+        <member name="char_member" type="char"/>
+        <member name="short_member" type="short"/>
+        <member name="wchar_member" type="wchar"/>
+        <member name="octet_member" type="octet"/>
+        <member name="unsigned_short_member" type="unsignedShort"/>
+        <member name="long_member"type="long"/>
+        <member name= "unsigned_long_member" type="unsignedLong"/>
+        <member name="long_long_member" type="longLong"/>
+        <member name="unsigned_long_long_member" type="unsignedLongLong"/>
+        <member name="float_member" type="float"/>
+        <member name="double_member" type="double"/>
+        <member name= "long_double_member" type="longDouble"/>
+        <member name="boolean_member" type="boolean"/>
+        <member name="string_member" type="string"/>
+        <member name="string_member" type="string" stringMaxLength="20"/>
+        <member name="wstring_member" type="wstring"/>
+        <member name="short_array" type="short" arrayDimensions="1,2"/>
+  </type_library>
+</dds>
+
+```
 ## Example API Usage
 ### Using DDSInterface wrapper
 ```
